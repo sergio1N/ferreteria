@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('persona', function (Blueprint $table) {
             $table->id('idpersona');
+            $table->unsignedBigInteger('idcargo');
+            $table->foreign('idcargo')->references('idcargo')->on('cargo');
             $table->string('nombre',70);
             $table->string('apellido',70);
             $table->string('direccion');
@@ -20,7 +22,6 @@ return new class extends Migration
             $table->date('fechanacimiento')->nullable();
             $table->string('correo');
             $table->string('documento',12);
-            $table->string('tipo',20);
             $table->timestamps();
         });
     }
