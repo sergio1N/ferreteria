@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\productosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+//mostrar vista agragar productos
+route::get('/agregarproducto',[productosController::class,'index'])->name('aggPro.index');
