@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idestanteria');
             $table->foreign('idestanteria')->references('idestanteria')->on('estanteria');
             $table->string('nombre',50);
+            $table->string('imagen');
             $table->decimal('precio');
             $table->string('unidadmedida')->nullable();
             $table->string('cantidadmedida')->nullable();
