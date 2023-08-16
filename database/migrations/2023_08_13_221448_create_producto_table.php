@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('unidadmedida')->nullable();
             $table->string('cantidadmedida')->nullable();
             $table->text('descripcion');
-            $table->float('stock',4);
+            $table->float('stock',6,2);
             $table->text('caracteristicas');
             $table->text('especificaciones');
             $table->timestamps();
