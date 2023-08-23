@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 //mostrar vista agragar productos
 route::get('/agregarproducto',[productosController::class,'index'])->name('aggPro.index');
+//crear producto
+route::post('/agregarprodcto',[productosController::class,'store'])->name('crearpro.store');
