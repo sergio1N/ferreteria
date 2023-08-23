@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\busquedapro;
 use Illuminate\Http\Request;
 
-
-class productosController extends Controller
+class BusquedaproController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       return view("agregarproducto");
+        //
+        $producto=busquedapro::orderBy('nombre','ASC')->paginate(5);
+        return view('prueba/index',['producto'=>$producto]);
     }
 
     /**
@@ -34,7 +36,7 @@ class productosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(busquedapro $busquedapro)
     {
         //
     }
@@ -42,7 +44,7 @@ class productosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(busquedapro $busquedapro)
     {
         //
     }
@@ -50,7 +52,7 @@ class productosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, busquedapro $busquedapro)
     {
         //
     }
@@ -58,7 +60,7 @@ class productosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(busquedapro $busquedapro)
     {
         //
     }

@@ -1,7 +1,7 @@
 @extends('layauds.base')
 @section('contenido')
 
- <h4>aqui va el contenido</h4>    
-  <a href="{{ route('aggPro.index') }}"><button>ingresar producto</button></a>
-
+     
+  <a href=""><button>ingresar producto</button></a>
+  <a href="{{ route('busquedapro.index') }}" target="_blank">Ir a otra pestaña</a>
 @endsection
