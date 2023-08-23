@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\productosController;
+use App\Http\Controllers\BusquedaproController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,5 +20,9 @@ Route::get('/', function () {
 
 //mostrar vista agragar productos
 route::get('/agregarproducto',[productosController::class,'index'])->name('aggPro.index');
+
 //crear producto
 route::post('/agregarprodcto',[productosController::class,'store'])->name('crearpro.store');
+//barra de busqueda
+route::get('/prueba/index', [App\Http\Controllers\BusquedaproController::class,'index'])->name('busquedapro.index');
+
