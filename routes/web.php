@@ -15,14 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('home');
 });
 
 //mostrar vista agragar productos
-route::get('/agregarproducto',[productosController::class,'index'])->name('aggPro.index');
+Route::get('/productos/agregar', [ProductosController::class, 'index'])->name('productos.agregar');
+
+//select marcas
+route::get('/productos/agregar',[productosController::class,'create'])->name('productos.create');
+//select categoria
+//route::get('/agregarproducto',[productosController::class,'createcategoria'])->name('crearpro.createcategoria');
 
 //crear producto
-route::post('/agregarprodcto',[productosController::class,'store'])->name('crearpro.store');
+route::post('/agregarprducto',[productosController::class,'store'])->name('crearpro.store');
+
 //barra de busqueda
 route::get('/prueba/index', [App\Http\Controllers\BusquedaproController::class,'index'])->name('busquedapro.index');
 

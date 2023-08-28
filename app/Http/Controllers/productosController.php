@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\busquedapro;
+use App\Models\categoria;
+use App\Models\marca;
+use App\Models\esta;
 use Illuminate\Http\Request;
-use App\Producto;
+
 
 
 class productosController extends Controller
@@ -12,7 +16,7 @@ class productosController extends Controller
      */
     public function index()
     {
-       return view("agregarproducto");
+        return view("agregarproducto");
     }
 
     /**
@@ -20,7 +24,10 @@ class productosController extends Controller
      */
     public function create()
     {
-        //
+        $estanterias = esta::all();
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+        return view('agregarproducto', compact('marcas', 'categorias','estanterias'));
     }
 
     /**
@@ -28,8 +35,9 @@ class productosController extends Controller
      */
     public function store(Request $request)
     {
-         // Validación de los datos
-         $validatedData = $request->validate([
+
+        // Validación de los datos
+        $validatedData = $request->validate([
             'marca' => 'required',
             'categoria' => 'required',
             'estanteria' => 'required',
@@ -42,10 +50,10 @@ class productosController extends Controller
             'caracteristicas' => 'required',
             'especificaciones' => 'required',
         ]);
-        Productos::create($validatedData);
+        busquedapro::create($validatedData);
 
-        return redirect()->route('index'); 
-    
+        return redirect()->route('crearpro.create')->with('success', 'Producto creado exitosamente');
+
     }
 
     /**
@@ -79,4 +87,4 @@ class productosController extends Controller
     {
         //
     }
-}
+};
