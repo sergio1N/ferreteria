@@ -62,6 +62,7 @@ class productosController extends Controller
     public function edit(string $id)
     {
         //
+        
     }
 
     /**
