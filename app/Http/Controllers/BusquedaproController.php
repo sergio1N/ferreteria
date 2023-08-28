@@ -44,9 +44,10 @@ class BusquedaproController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(busquedapro $busquedapro)
+    public function edit($id)
     {
-        //
+        $producto = busquedapro::findOrFail($id);
+        return view('prueba.edit', compact('producto'));
     }
 
     /**
