@@ -7,6 +7,9 @@ use App\Models\categoria;
 use App\Models\marca;
 use App\Models\esta;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Producto;
+
 
 
 
@@ -17,7 +20,6 @@ class productosController extends Controller
      */
     public function index()
     {
-        return view("agregarproducto");
     }
 
     /**
@@ -31,8 +33,11 @@ class productosController extends Controller
         $categorias = Categoria::orderBy('nombre')->get();
 
         return view('agregarproducto', compact('marcas', 'categorias', 'estanterias'));
+
+        
     }
 
+    
 
     /**
      * Store a newly created resource in storage.
@@ -100,23 +105,51 @@ class productosController extends Controller
     public function edit(string $id)
     {
         //
+        $producto = busquedapro::findOrfail($id);
+        return view('prueba/edit', ['producto'=>$producto]);
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+   public function update(Request $request, $id)
     {
-        //
-    }
+        // Validar los datos del formulario de actualización aquí si es necesario
 
-    /**
+        // Buscar el producto por su ID
+        $producto = busquedapro::find($id);
+
+        if (!$producto) {
+            // Manejar el caso en el que no se encuentra el producto
+            return redirect()->route('busquedapro.index')->with('error', 'Producto no encontrado');
+        }
+
+        // Actualizar los campos del producto con los datos del formulario
+        $producto->nombre = $request->input('nombre');
+        $producto->idestanteria = $request->estanteria;
+        $producto->precio = $request->input('precio');
+        $producto->unidadmedida = $request->input('unidadmedida');
+        $producto->cantidadmedida = $request->input('cantidadmedida');
+
+        // ... otros campos
+
+        // Guardar el producto actualizado en la base de datos
+        $producto->save();
+
+        // Redirigir a alguna vista de éxito o a donde desees
+        return redirect()->route('busquedapro.index')->with('success', 'Producto actualizado con éxito');
+    }
+  /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         //
-    }
+    }  
+
+
+
 }
-;
+
+  

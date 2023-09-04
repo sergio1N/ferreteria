@@ -21,10 +21,7 @@ Route::get('/', function () {
 });
 
 //mostrar vista agragar productos
-Route::get('/home/productos', [ProductosController::class, 'index'])->name('productos.agregar');
-//select option
-route::get('/home/productos',[productosController::class,'create'])->name('productos.create');
-
+Route::get('/productos', [ProductosController::class, 'create'])->name('productos.agregar');
 //crear marca
 route::post('/productos/agregar4',[marcaController::class,'store'])->name('marca.store');
 //crear categoria
@@ -32,7 +29,10 @@ route::post('/productos/agregar5',[categoriaController::class,'store'])->name('c
 //crear producto
 route::post('/agregar/producto',[productosController::class,'store'])->name('crearpro.store');
 
-//barra de busqueda
-route::get('/prueba/index', [BusquedaproController::class,'index'])->name('{busquedapro.index}');
-// editar producto 
-route::get('/prueba/edit/{id}', [BusquedaproController::class,'edit'])->name('busquedapro.edit');
+// Ruta de búsqueda de productos
+Route::get('/prueba/index', [BusquedaproController::class, 'index'])->name('busquedapro.index');
+
+// Ruta para editar producto
+Route::get('/prueba/edit/{id}', [BusquedaproController::class, 'edit'])->name('busquedapro.edit');
+// ruta actualisar producto
+Route::put('producto/actualizar/{idproducto}', [ProductosController::class, 'update'])->name('producto.update');

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\busquedapro;
+use App\Models\esta;
 use Illuminate\Http\Request;
+
 
 class BusquedaproController extends Controller
 {
@@ -23,6 +25,7 @@ class BusquedaproController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -47,7 +50,9 @@ class BusquedaproController extends Controller
     public function edit($id)
     {
         $producto = busquedapro::findOrFail($id);
-        return view('prueba.edit', compact('producto'));
+        $estanterias = Esta::orderBy('nombre')->get();
+        return view('prueba.edit', compact('producto','estanterias'));
+        
     }
 
     /**
