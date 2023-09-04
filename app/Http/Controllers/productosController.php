@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\busquedapro;
 use App\Models\categoria;
 use App\Models\marca;
@@ -24,37 +25,66 @@ class productosController extends Controller
      */
     public function create()
     {
-        $estanterias = esta::all();
-        $marcas = Marca::all();
-        $categorias = Categoria::all();
-        return view('agregarproducto', compact('marcas', 'categorias','estanterias'));
+        // Desplegables
+        $estanterias = Esta::orderBy('nombre')->get();
+        $marcas = Marca::orderBy('nombre')->get();
+        $categorias = Categoria::orderBy('nombre')->get();
+
+        return view('agregarproducto', compact('marcas', 'categorias', 'estanterias'));
     }
+
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-
-        // Validación de los datos
-        $validatedData = $request->validate([
+        $request->validate([
             'marca' => 'required',
             'categoria' => 'required',
-            'estanteria' => 'required',
             'nombre' => 'required',
-            'precio' => 'required|numeric',
-            'unidadm' => 'required',
-            'medida' => 'required|numeric',
+            'estanteria' => 'required',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'precio' => 'required',
+            'unidadm' => 'nullable',
+            'medida' => 'nullable', 
             'descripcion' => 'required',
-            'stock' => 'required|numeric',
+            'stock' => 'required',
             'caracteristicas' => 'required',
             'especificaciones' => 'required',
+            'idper' => 'required',
         ]);
-        busquedapro::create($validatedData);
 
-        return redirect()->route('crearpro.create')->with('success', 'Producto creado exitosamente');
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $nombre_imagen = time() . '.' . $imagen->getClientOriginalExtension();
+            $ruta = public_path('imagenes/productos/' . $nombre_imagen);
 
+            // Guarda la imagen en la carpeta deseada
+            $imagen->move(public_path('imagenes/productos'), $nombre_imagen);
+
+            $producto = busquedapro::create([
+                'idmarca' => $request->input('marca'),
+                'idcategoria' => $request->input('categoria'),
+                'idpersona' => $request->input('idper'),
+                'idestanteria' => $request->input('estanteria'),
+                'nombre' => $request->input('nombre'),
+                'imagen' => 'imagenes/productos/' . $nombre_imagen,
+                'precio' => $request->input('precio'),
+                'unidadmedida' => $request->input('unidadm'),
+                'cantidadmedida' => $request->input('medida'),
+                'descripcion' => $request->input('descripcion'),
+                'stock' => $request->input('stock'),
+                'caracteristicas' => $request->input('caracteristicas'),
+                'especificaciones' => $request->input('especificaciones'),
+            ]);
+        }
+
+        return redirect()->back();
     }
+
+
 
     /**
      * Display the specified resource.
@@ -70,7 +100,7 @@ class productosController extends Controller
     public function edit(string $id)
     {
         //
-        
+
     }
 
     /**
@@ -88,4 +118,5 @@ class productosController extends Controller
     {
         //
     }
-};
+}
+;

@@ -1,6 +1,8 @@
 <?php
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\BusquedaproController;
+use App\Http\Controllers\marcaController;
+use App\Http\Controllers\categoriaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,21 +21,18 @@ Route::get('/', function () {
 });
 
 //mostrar vista agragar productos
-<<<<<<< HEAD
-Route::get('/productos/agregar', [ProductosController::class, 'index'])->name('productos.agregar');
+Route::get('/home/productos', [ProductosController::class, 'index'])->name('productos.agregar');
+//select option
+route::get('/home/productos',[productosController::class,'create'])->name('productos.create');
 
-//select marcas
-route::get('/productos/agregar',[productosController::class,'create'])->name('productos.create');
-//select categoria
-//route::get('/agregarproducto',[productosController::class,'createcategoria'])->name('crearpro.createcategoria');
-
-=======
-route::get('/agregarproducto',[productosController::class,'index'])->name('aggPro.index');
->>>>>>> 77eaa353ad91cf7abb6bd1524626be6170d7508e
+//crear marca
+route::post('/productos/agregar4',[marcaController::class,'store'])->name('marca.store');
+//crear categoria
+route::post('/productos/agregar5',[categoriaController::class,'store'])->name('categoria.store');
 //crear producto
-route::post('/agregarprducto',[productosController::class,'store'])->name('crearpro.store');
+route::post('/agregar/producto',[productosController::class,'store'])->name('crearpro.store');
 
 //barra de busqueda
-route::get('/prueba/index', [App\Http\Controllers\BusquedaproController::class,'index'])->name('busquedapro.index');
+route::get('/prueba/index', [BusquedaproController::class,'index'])->name('{busquedapro.index}');
 // editar producto 
-route::get('/prueba/edit/{id}', [App\Http\Controllers\BusquedaproController::class,'edit'])->name('busquedapro.edit');
+route::get('/prueba/edit/{id}', [BusquedaproController::class,'edit'])->name('busquedapro.edit');

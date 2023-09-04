@@ -1,0 +1,70 @@
+input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden; /* Oculta el botón predeterminado de selección de archivo */
+  }
+  input[type="file"]::before {
+    content: 'Seleccionar imagen'; /* Agrega un texto personalizado para el botón */
+    display: inline-block;
+    background: #80858a;
+    color: white;
+    padding: 1px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+  }
+  
+  /* Asegura que el estilo del botón se aplique en otros navegadores */
+  input[type="file"]::-ms-browse {
+    visibility: hidden;
+  }
+  input[type="file"]::-ms-value {
+    visibility: hidden;
+  }
+/*cambir de color boton*/
+
+/*  no seleccionado archivo */
+input[type="file"]::before {
+  content: 'Seleccionar archivo';
+  /* ... otros estilos ... */
+  background-color: grey;
+  color: white;
+}
+
+/* se ha seleccionado un archivo */
+input[type="file"].file-selected::before {
+  background-color: #4caf50; /* color*/
+}
+
+
+
+#success-message {
+    display: none;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position:fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    border-radius: 5px;
+    animation: fadeOut 3s ease-in-out;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+/*estilos para nuevo de select */
+select#categoria option[value="nuevaC"] {
+  background-color: #E3E3E3;
+  ;
+}
+select#marca option[value="nueva"] {
+  background-color: #E3E3E3;
+}

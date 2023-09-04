@@ -1,13 +1,8 @@
 @extends('layauds.base')
 @section('contenido')
-<<<<<<< HEAD
-=======
+
   <a href=""><button>ingresar producto</button></a>
   <input type="search" id="buscador" placeholder="buscar por nombre o id" class="from-control from-control-sm" >
-  
-
->>>>>>> 77eaa353ad91cf7abb6bd1524626be6170d7508e
-
   <main>
     <html>
     <head>
