@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--CSS-->
     <link rel="stylesheet" href="{{ asset('css/formularioagpro.css') }}">
+    
     <!-------------boostrap------------------------>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
@@ -27,8 +28,28 @@
     <title>Document</title>
 </head>
 <header>
-    aqui va el encabezado
+    <nav>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            @guest
+            <!-- Si el usuario no está autenticado -->
+            <li> <a href="{{ route('productos.index') }}">iniciar sesion</a></li>
+           
+            @else
+            <!-- Si el usuario está autenticado -->
+            <li><a href="{{ route('dashboard') }}">{{ Auth::user()->name }}</a></li>
+            
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            </li>
+            @endguest
+        </ul>
+    </nav>
 </header>
+
 
 <body>
     @yield('contenido')

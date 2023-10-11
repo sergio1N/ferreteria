@@ -20,6 +20,7 @@ class productosController extends Controller
      */
     public function index()
     {
+        return view('iniciologin');
     }
 
     /**
@@ -111,17 +112,15 @@ class productosController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
+         * Update the specified resource in storage.
+         */
    public function update(Request $request, $id)
     {
-        // Validar los datos del formulario de actualización aquí si es necesario
 
-        // Buscar el producto por su ID
         $producto = busquedapro::find($id);
 
         if (!$producto) {
-            // Manejar el caso en el que no se encuentra el producto
+          
             return redirect()->route('busquedapro.index')->with('error', 'Producto no encontrado');
         }
 
@@ -131,10 +130,6 @@ class productosController extends Controller
         $producto->precio = $request->input('precio');
         $producto->unidadmedida = $request->input('unidadmedida');
         $producto->cantidadmedida = $request->input('cantidadmedida');
-
-        // ... otros campos
-
-        // Guardar el producto actualizado en la base de datos
         $producto->save();
 
         // Redirigir a alguna vista de éxito o a donde desees

@@ -5,7 +5,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <form action="{{ route('crearpro.store') }}" autocomplete="off" method="POST" enctype="multipart/form-data" >
+    <form action="{{ route('crearpro.store') }}" autocomplete="off" method="POST" enctype="multipart/form-data">
         @csrf
         <h6>Completa los siguientes campos para ingresar un nuevo producto</h6>
 
@@ -22,7 +22,7 @@
         <select id="categoria" name="categoria" required>
             <option value="" disabled selected>Selecciona una categoria</option>
             @foreach ($categorias as $categoria)
-                <option value="{{ $categoria->idcategoria}}">{{ $categoria->nombre }}</option>
+                <option value="{{ $categoria->idcategoria }}">{{ $categoria->nombre }}</option>
             @endforeach
             <option value="nuevaC">¿Nueva categoria?</option>
             <br>
