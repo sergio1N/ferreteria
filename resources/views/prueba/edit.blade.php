@@ -3,18 +3,23 @@
   <form action="{{ route('producto.update', $producto->idproducto) }}" method="POST">
     @csrf
     @method('PUT')
-    <h5>llene los siguientes campos para editar el producto seleccionado</h5>
+    <h5>Llene los siguientes campos para editar el producto seleccionado</h5>
     <br>
     <label for="nombre">Nombre</label>
-    <input name="nombre" type="text" value="{{ $producto->nombre }}" id="nombre" readquired>
+    <input name="nombre" type="text" value="{{ $producto->nombre }}" id="nombre" required>
     <br>
-    <label for="estanteria">Estanteria:</label>
+    <label for="estanteria">Estantería:</label>
     <select id="estanteria" name="estanteria" required>
-        <option value="" disabled selected>Selecciona una estanteria</option>
-        @foreach ($estanterias as $estanteria)
-            <option value="{{ $estanteria->idestanteria }}">{{ $estanteria->nombre }}</option>
-        @endforeach
+      <option value="" disabled>Selecciona una estantería</option>
+      @foreach ($estanterias as $estanteria)
+      <option value="{{ $estanteria->idestanteria }}" {{ $estanteria->idestanteria == $producto->idestanteria ? 'selected' : '' }}>
+        {{ $estanteria->nombre }}
+    </option>
+    
+      @endforeach
     </select>
+  
+  
     <label for="precio">Precio:</label>
     <input type="text" id="precio" name="precio" value="{{ $producto->precio }}">
     <br>

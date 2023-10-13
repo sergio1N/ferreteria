@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--CSS-->
     <link rel="stylesheet" href="{{ asset('css/formularioagpro.css') }}">
+    <!--vistaproductos-->
+    <link rel="stylesheet" href="{{ asset('css/producto.css') }}">
     
     <!-------------boostrap------------------------>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

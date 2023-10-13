@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class marca extends Model
 {
     use HasFactory;
-    protected $table='marca';
-    protected $fillable =['nombre'];
+    protected $table = 'marca';
+    protected $fillable = ['idmarca','nombre','visible'];
+    protected $primaryKey = 'idmarca';
 }

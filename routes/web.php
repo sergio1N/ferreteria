@@ -2,6 +2,8 @@
 use App\Http\Controllers\productosController;
 use App\Http\Controllers\BusquedaproController;
 use App\Http\Controllers\marcaController;
+use App\Http\Controllers\proveedorcontroller;
+use App\Http\Controllers\pedidocontroller;
 use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roles\adminAuthController;
@@ -24,6 +26,7 @@ Route::get('/', function () {
     return view('home');
 });
 
+//producto/////////////////////////////////////////////////////////////////////////////////////////////////
 //mostrar vista agragar productos
 Route::get('/productos', [ProductosController::class, 'create'])->name('productos.agregar');
 //prueba de inicio de sesion
@@ -42,7 +45,54 @@ Route::get('/prueba/index', [BusquedaproController::class, 'index'])->name('busq
 Route::get('/prueba/edit/{id}', [BusquedaproController::class, 'edit'])->name('busquedapro.edit');
 // ruta actualisar producto
 Route::put('producto/actualizar/{idproducto}', [ProductosController::class, 'update'])->name('producto.update');
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//marca/////////////////////////////////////////////////////////////////////////////
+// ruta para la vista marca
+Route::get('/marca/index', [marcaController::class, 'index'])->name('marca.index');
+// Ruta para ocultar marca
+Route::post('/marca/hide/{idmarca}', [marcaController::class, 'hide'])->name('marca.hide');
+// Ruta para filtrar marcas 
+Route::get('/marca/filter', [marcaController::class, 'filter'])->name('marca.filter');
+// rutapara ver marcas ocultas
+Route::get('/marcas-ocultas', [marcaController::class,'marcasOcultas'])->name('marcas.ocultas');
+// colocar marcas visibles 
+Route::post('/marcas/show/{idmarca}', [MarcaController::class, 'show'])->name('marca.show');
+// Ruta para actualizar marca
+Route::post('/marca/update/{idmarca}', [marcaController::class, 'update'])->name('marca.update');
+// Ruta para editar marca
+Route::get('/marca/edit/{idmarca}', [marcaController::class, 'edit'])->name('marca.edit');
+//crear marca
+route::post('/productos/agregar4',[marcaController::class,'store'])->name('marca.store');
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//proveedores 
+// ruta para la vista proebeedores
+Route::get('/proveedor/index', [proveedorController::class, 'index'])->name('proveedor.index');
+//crear proveedores
+route::post('/proveedor/agregar',[proveedorController::class,'store'])->name('proveedor.store');
+//pasar las listas deplegables
+Route::get('/proveedor/create', [proveedorController::class, 'create'])->name('proveedor.create');
+// desavilitar porveedor 
+Route::put('/proveedor/hide/{idproveedor}', [proveedorController::class, 'hide'])->name('proveedor.hide');
+//ruta preveedores ocultos 
+Route::get('/proveedor/ocultos', [proveedorController::class, 'showHidden'])->name('proveedor.ocultos');
+// ruta ocultos 
+Route::put('/proveedor/show/{idproveedor}', [proveedorController::class, 'showHidden'])->name('proveedor.show');
+//mostrar los prevedores ocultos 
+Route::get('/proveedores-ocultos', [proveedorController::class, 'showHiddenIndex'])->name('proveedores-ocultos');
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//pedido
+Route::get('/pedido/index', [pedidoController::class, 'index'])->name('pedido.index');
+
+///////////////////////////////////////////////////////////
+
+//categoria////////////////////////////////////////////////////
+//crear categoria
+route::post('/productos/agregar5',[categoriaController::class,'store'])->name('categoria.store');
+
+////////////////////////////////////////////////////////////////////////////////////////}
 
 //inicio de sesion/--------------------------------------------------------------------------------------------
 Route::get('/dashboard', function () {
