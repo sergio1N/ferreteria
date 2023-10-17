@@ -35,6 +35,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('contable.index');
         } else if(auth()->user()->role == 'almacenista') {
             return redirect()->route('almacenista.index');
+        }else if(auth()->user()->role == 'invitado'){
+            return redirect()->route('invitado.index');
         }
         return redirect()->intended(RouteServiceProvider::HOME);
     }

@@ -6,7 +6,8 @@ use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roles\adminAuthController;
 use App\Http\Controllers\roles\contableAuthController;
-use App\Http\Middleware\almacenista;
+use App\Http\Controllers\roles\almacenistaAuthController;
+use App\Http\Controllers\roles\invitadoAuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,3 +71,7 @@ route::get('/contable',[contableAuthController::class, 'index'])
 route::get('/almacenista',[almacenistaAuthController::class, 'index'])
 ->middleware('auth.almacenista')
 ->name('almacenista.index');
+//autenticacion invitado
+route::get('/invitado',[invitadoAuthController::class, 'index'])
+->middleware('auth.invitado')
+->name('invitado.index');
