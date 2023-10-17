@@ -1,0 +1,19 @@
+
+.producto {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.producto,
+.producto td,
+.producto th {
+    border: 1px solid #070707;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #d3d0d0;
+}

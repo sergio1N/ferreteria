@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('marca', function (Blueprint $table) {
             $table->id('idmarca');
-            $table->string('nombre',50);
+            $table->string('nombre', 50);
+            $table->boolean('visible')->default(true); // Nuevo campo 'visible'
             $table->timestamps();
         });
     }
@@ -26,3 +27,4 @@ return new class extends Migration
         Schema::dropIfExists('marca');
     }
 };
+

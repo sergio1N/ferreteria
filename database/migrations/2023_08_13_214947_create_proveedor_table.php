@@ -17,11 +17,12 @@ return new class extends Migration
             $table->foreign('iddepartamento')->references('iddepartamento')->on('departamento');
             $table->unsignedBigInteger('idciudad');
             $table->foreign('idciudad')->references('idciudad')->on('ciudad');
-            $table->string('nombre',40);
-            $table->string('telefono',17);
+            $table->string('nombre', 40);
+            $table->string('telefono', 17);
             $table->string('direccion');
-            $table->string('nit',50);
+            $table->string('nit', 50);
             $table->string('correo');
+            $table->boolean('visible')->default(true); // Nuevo campo 'visible'
             $table->timestamps();
         });
     }
@@ -34,3 +35,4 @@ return new class extends Migration
         Schema::dropIfExists('proveedor');
     }
 };
+
