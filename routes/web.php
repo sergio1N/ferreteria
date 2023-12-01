@@ -24,14 +24,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('principal');
 });
 
-//producto/////////////////////////////////////////////////////////////////////////////////////////////////
+//producto/
 //mostrar vista agragar productos
 Route::get('/productos', [ProductosController::class, 'create'])->name('productos.agregar');
 //prueba de inicio de sesion
 Route::get('/iniciologin', [ProductosController::class, 'index'])->name('productos.index');
+
+//mostrar producto cliente inicio
+Route::get('/', [productosController::class,'mostrarProductos'])->name('productos-mostrar');
+//mostar productos vista
+route::get('/vistapro',[productosController::class,'show'])->name('productos.vista');
+
+
 //crear marca
 route::post('/productos/agregar4',[marcaController::class,'store'])->name('marca.store');
 //crear categoria

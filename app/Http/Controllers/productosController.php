@@ -18,6 +18,11 @@ class productosController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function mostrarProductos()
+    {
+        $productos = Producto::take(6)->get();
+        return view('principal', compact('productos'));
+    }
     public function index()
     {
         return view('iniciologin');
@@ -38,8 +43,7 @@ class productosController extends Controller
         
     }
 
-    
-
+ 
     /**
      * Store a newly created resource in storage.
      */
@@ -87,7 +91,7 @@ class productosController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Producto Creado con éxito');
     }
 
 
@@ -95,9 +99,9 @@ class productosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        return view('roles.usuario.productos');
     }
 
     /**
