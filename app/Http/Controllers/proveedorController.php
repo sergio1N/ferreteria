@@ -37,6 +37,30 @@ class proveedorController extends Controller
      
          return view('proveedor.index', compact('proveedor', 'departamento', 'ciudad'));
      }
+     public function nombre()
+     {
+         $proveedor = DB::table('departamento')
+             ->join('proveedor', 'proveedor.iddepartamento', '=', 'departamento.iddepartamento')
+             ->join('ciudad', 'proveedor.idciudad', '=', 'ciudad.idciudad')
+             ->select(
+                 'proveedor.idproveedor as idproveedor', 
+                 'departamento.iddepartamento', 'departamento.nombre as departamento',    
+                 'ciudad.idciudad', 'ciudad.nombre as ciudad', 
+                 'proveedor.nombre as nombre',
+                 'proveedor.telefono as telefono',
+                 'proveedor.direccion as direccion',
+                 'proveedor.nit as nit',
+                 'proveedor.correo as correo',
+             )
+             ->where('proveedor.visible', true) // Filtra solo proveedores visibles
+             ->orderBy('idproveedor', 'ASC')
+             ->paginate(5);
+     
+         $departamento = departamento::orderBy('nombre')->get();
+         $ciudad = ciudad::orderBy('nombre')->get();
+     
+         return view('pedido.proveedores', compact('proveedor', 'departamento', 'ciudad'));
+     }
      
      public function hide($idproveedor)
     {

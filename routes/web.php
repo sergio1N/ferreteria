@@ -8,6 +8,7 @@ use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roles\adminAuthController;
 use App\Http\Controllers\roles\contableAuthController;
+use App\Http\Controllers\detallePedidoController;
 use App\Http\Middleware\almacenista;
 use Illuminate\Support\Facades\Route;
 
@@ -83,8 +84,26 @@ Route::put('/proveedor/show/{idproveedor}', [proveedorController::class, 'showHi
 Route::get('/proveedores-ocultos', [proveedorController::class, 'showHiddenIndex'])->name('proveedores-ocultos');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//pedido
+// Pedido
 Route::get('/pedido/index', [pedidoController::class, 'index'])->name('pedido.index');
+Route::get('/pedido/{nombre}', [pedidoController::class, 'show'])->name('pedidos.show'); 
+//Route::get('/pedido/pendientes', [PedidoController::class, 'pedi'])->name('pendientes');
+Route::get('/pedido/pendientes', 'App\Http\Controllers\pedidoController@pedi')->name('pendientes');
+
+Route::post('/pedido/store', [PedidoController::class, 'store'])->name('pedido.store');
+
+
+
+
+
+
+
+
+
+// Detalle del Pedido
+Route::get('/pedido/{id}', [detallePedidoController::class, 'mostrarDetalles'])->name('detalle.pedido');
+Route::get('/nombre', [proveedorController::class, 'nombre'])->name('nombre.pedido');
+
 
 ///////////////////////////////////////////////////////////
 
