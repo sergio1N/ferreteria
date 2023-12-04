@@ -5,14 +5,15 @@ namespace App\Http\Controllers\roles;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class almacenistaAuthController extends Controller
+class invitadoAuthController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('roles/almacenista/homeAlmacenista');
+        //
+        return view('roles/invitado/homeinvitado');
     }
 
     /**

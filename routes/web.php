@@ -8,8 +8,12 @@ use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\roles\adminAuthController;
 use App\Http\Controllers\roles\contableAuthController;
+
 use App\Http\Controllers\detallePedidoController;
 use App\Http\Middleware\almacenista;
+use App\Http\Controllers\roles\almacenistaAuthController;
+use App\Http\Controllers\roles\invitadoAuthController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,14 +28,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('principal');
 });
 
-//producto/////////////////////////////////////////////////////////////////////////////////////////////////
+//producto/
 //mostrar vista agragar productos
 Route::get('/productos', [ProductosController::class, 'create'])->name('productos.agregar');
 //prueba de inicio de sesion
 Route::get('/iniciologin', [ProductosController::class, 'index'])->name('productos.index');
+
+//mostrar producto cliente inicio
+Route::get('/', [productosController::class,'mostrarProductos'])->name('productos-mostrar');
+//mostar productos vista
+route::get('/vistapro',[productosController::class,'show'])->name('productos.vista');
+
+
 //crear marca
 route::post('/productos/agregar4',[marcaController::class,'store'])->name('marca.store');
 //crear categoria
@@ -139,3 +150,7 @@ route::get('/contable',[contableAuthController::class, 'index'])
 route::get('/almacenista',[almacenistaAuthController::class, 'index'])
 ->middleware('auth.almacenista')
 ->name('almacenista.index');
+//autenticacion invitado
+route::get('/invitado',[invitadoAuthController::class, 'index'])
+->middleware('auth.invitado')
+->name('invitado.index');

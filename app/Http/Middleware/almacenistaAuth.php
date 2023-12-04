@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class almacenista
+class almacenistaAuth
 {
     /**
      * Handle an incoming request.

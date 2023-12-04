@@ -44,6 +44,14 @@ class DatabaseSeeder extends Seeder
         $user->role = 'almacenista';
 
         $user->save();
+        //crear datos para invitado
+        $user = new User;
+        $user->name = 'invitado';
+        $user->email = 'invitado@gmail.com';
+        $user->password = '12345678';
+        $user->role = 'invitado';
+
+        $user->save();
 
     }
 }

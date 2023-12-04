@@ -1,5 +1,10 @@
 @extends('layauds.base')
 @section('contenido')
+    {{-- CSS --}}
+    <link rel="stylesheet" href="{{ asset('css/formularioagpro.css') }}">
+    <!--javaScrip-->
+    <script src="{{ asset('js/agregarproducto.js') }}"></script>
+    {{--  --}}
     @if (session('success'))
         <div class="alert alert-success" id="success-message">
             {{ session('success') }}
