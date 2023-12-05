@@ -3,125 +3,83 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\Models\pedido;
+use App\Models\Pedido; // Importa el modelo Pedido
+use App\Models\Proveedor;
 
-
-
-
-class pedidoController extends Controller
+class PedidoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $pedido = DB::table('pedido')
-            ->join('proveedor', 'pedido.idproveedor', '=', 'proveedor.idproveedor')
-            ->select(
-                'pedido.idpedido as idpedido',
-                'proveedor.idproveedor',
-                'proveedor.nombre as proveedor',
-                'pedido.fotofactura as foto'
-            )
-            ->orderBy('idpedido', 'ASC')
-            ->get();
-
-        return view('pedido/index', ['pedido' => $pedido]);
+        // Utiliza paginate() para obtener una cantidad específica de pedidos por página
+        $pedidos = Pedido::orderBy('created_at', 'desc')->paginate(10); // Cambia el número 10 según tus necesidades
+        return view('pedido.index', compact('pedidos'));
     }
-
-    public function pedi()
+    public function pendientes()
     {
-        // Obtén los pedidos pendientes desde la base de datos
-        //$pedidosPendientes = DB::table('pedidos')->where('estado', 'pendiente')->get();
+        $pedidosPendientes = Pedido::with('proveedor')
+            ->doesntHave('detalles')
+            ->latest()
+            ->paginate(10);
 
-        //return view('pedido.pendientes');
-
-        return view('hola');
+        return view('pedidos.pendientes', compact('pedidosPendientes'));
     }
+
     public function verificarPedido(Request $request, $idPedido)
     {
-        // Realiza la verificación y actualiza el estado del pedido
-        DB::table('pedidos')->where('idpedido', $idPedido)->update(['estado' => 'verificado']);
-
-        return redirect()->route('pedido.pendientes')->with('success', 'Pedido verificado correctamente');
+        // Tu lógica aquí
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    // PedidoController.php
     public function create()
     {
-
         return view('pedido.create');
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // Valida los datos del formulario
         $request->validate([
-            'producto' => 'required',
-            'descripcion' => 'required',
-            'precio' => 'required|numeric',
-            'cantidad' => 'required|numeric',
-            'valortotal' => 'required|numeric',
+            'idproveedor' => 'required|exists:proveedor,idproveedor',
+            'fotoFactura' => 'required|mimes:jpeg,png,pdf,doc,docx',
         ]);
-
-        // Crea un nuevo pedido con los datos del formulario
+    
+        // Procesa y almacena el pedido
+        $rutaArchivo = $request->file('fotoFactura')->store('archivos_pedidos');
+    
         Pedido::create([
-            'producto' => $request->producto,
-            'descripcion' => $request->descripcion,
-            'precio' => $request->precio,
-            'cantidad' => $request->cantidad,
-            'valortotal' => $request->valortotal,
-            // Agrega más campos según sea necesario
+            'idproveedor' => $request->idproveedor,
+            'fotofactura' => $rutaArchivo,
         ]);
-
-        // Redirecciona a donde sea apropiado después de almacenar el pedido
-        return redirect()->route('pedido.proveedor')->with('success', 'Pedido creado exitosamente');
+    
+        return redirect()->route('pedidos.index')->with('success', 'Pedido agregado correctamente');
     }
-
+    
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $proveedor = DB::table('proveedor')->where('nombre', $id)->first();
-
-        if (!$proveedor) {
-            return abort(404);
-        }
-
-        $pedidos = DB::table('pedido')
-            ->join('proveedor', 'pedido.idproveedor', '=', 'proveedor.idproveedor')
-            ->select(
-                'pedido.idpedido as idpedido',
-                'proveedor.idproveedor',
-                'proveedor.nombre as proveedor',
-                'pedido.fotofactura as foto'
-            )
-            ->where('proveedor.idproveedor', $proveedor->idproveedor)
-            ->orderBy('idpedido', 'ASC')
-            ->get();
-
-        return view('pedido.index', ['pedido' => $pedidos, 'proveedor' => $proveedor]);
+        $pedido = Pedido::findOrFail($id);
+        $detalles = $pedido->detalles(); // Asume que hay una relación entre Pedido y DetallePedido
+    
+        return view('pedido.show', compact('pedido', 'detalles'));
     }
-
-
-
+    
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        // Tu lógica aquí
     }
 
     /**
@@ -129,7 +87,7 @@ class pedidoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Tu lógica aquí
     }
 
     /**
@@ -137,6 +95,24 @@ class pedidoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Tu lógica aquí
     }
+
+    public function mostrarProveedores()
+    {
+        $proveedores = Proveedor::all();
+        return view('pedido.proveedores', compact('proveedores'));
+    }
+
+    public function pedidosPorProveedor($idProveedor)
+    {
+        $proveedor = Proveedor::find($idProveedor);
+        $pedidos = Pedido::where('idproveedor', $idProveedor)->get();
+        return view('pedido.pedido', compact('proveedor', 'pedidos'));
+    }
+    public function pedidosLlegados()
+{
+    $pedidosLlegados = Pedido::where('llegado', true)->paginate(5);
+    return view('pedidos.llegados', compact('pedidosLlegados'));
+}
 }

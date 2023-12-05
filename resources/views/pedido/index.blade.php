@@ -1,23 +1,26 @@
 @extends('layauds.base')
 
-@section('content')
-    <div class="container">
-        <h1>Pedidos del Proveedor: {{ $proveedor->nombre }}</h1>
-        <table class="table">
-            <thead>
+@section('contenido')
+<a href="{{ route('pedidos.pendientes') }}">Ver Pedidos Pendientes</a>
+    <h1>Lista de Pedidos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Proveedor</th>
+                <th>Archivo</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($pedidos as $pedido)
                 <tr>
-                    <th>ID Pedido</th>
-                    <th>Foto de Factura</th>
+                    <td>{{ $pedido->proveedor->nombre }}</td>
+                    <td>{{ $pedido->nombre_archivo }}</td>
+                    <td>{{ \Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y H:i:s') }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($pedido as $pedid)
-                    <tr>
-                        <td>{{ $pedid->idpedido }}</td>
-                        <td><img src="{{ asset('ruta/a/tu/imagen/' . $pedid->foto) }}" alt="Factura"></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
+    {{ $pedidos->links('pagination::bootstrap-4') }}
 @endsection

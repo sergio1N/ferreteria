@@ -13,6 +13,7 @@ class departamentoController extends Controller
     public function index()
     {
         //
+
     }
 
     /**

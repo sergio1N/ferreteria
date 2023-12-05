@@ -1,26 +1,26 @@
-@extends('layouts.base')
+@extends('layauds.base')
 
 @section('contenido')
-    <h1>Pedidos Pendientes</h1>
+    <a href="{{ route('pedidos.pendientes') }}" class="btn btn-primary">Ver Pedidos Pendientes</a>
+    <h1>Lista de Pedidos</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>ID Pedido</th>
                 <th>Proveedor</th>
-                <th>Fecha de Pedido</th>
-                <!-- Otros campos según tus necesidades -->
+                <th>Archivo</th>
+                <th>Fecha</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($pedidosPendientes as $pedido)
+            @foreach($pedidos as $pedido)
                 <tr>
-                    <td>{{ $pedido->idpedido }}</td>
-                    <td>{{ $pedido->proveedor }}</td>
-                    <td>{{ $pedido->fecha_pedido }}</td>
-                    <!-- Otros campos según tus necesidades -->
+                    <td>{{ $pedido->proveedor->nombre }}</td>
+                    <td>{{ $pedido->nombre_archivo }}</td>
+                    <td>{{ \Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y H:i:s') }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    {{ $pedidos->links('pagination::bootstrap-4') }}
 @endsection

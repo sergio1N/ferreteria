@@ -47,7 +47,7 @@ class productosController extends Controller
         $marcas = Marca::orderBy('nombre')->get();
         $categorias = Categoria::orderBy('nombre')->get();
 
-        return view('agregarproducto', compact('marcas', 'categorias', 'estanterias'));
+        return view('prueba/agregarproducto', compact('marcas', 'categorias', 'estanterias'));
 
 
     }
@@ -169,8 +169,10 @@ class productosController extends Controller
     {
         //
     }
+    // app/Http/Controllers/BusquedaproController.php
 
 
 
+    
 }
 

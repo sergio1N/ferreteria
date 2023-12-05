@@ -1,7 +1,8 @@
 @extends('layauds.base')
 
 @section('contenido')
-    <a href=""><button>ingresar producto</button></a>
+    <a href="{{ route('productos.agregar') }}"><button>ingresar producto</button></a>
+    <a href="{{ route('generar.informe.pdf') }}" target="_blank"><button>informe de ventas</button></a>
     <input type="search" id="buscador" placeholder="buscar por nombre o id" class="form-control form-control-sm">
 
     <main>
@@ -60,12 +61,8 @@
             $("#resultados tr").filter(function () {
                 var idProducto = $(this).find("td:eq(0)").text().toLowerCase();
                 var nombre = $(this).find("td:eq(4)").text().toLowerCase(); 
-                
-                // Comprobamos si el valor coincide con el ID o el nombre
                 var matchId = idProducto.indexOf(value) > -1;
                 var matchNombre = nombre.indexOf(value) > -1;
-                
-                // Mostramos la fila si hay coincidencia en el ID o el nombre
                 $(this).toggle(matchId || matchNombre);
             });
         });
