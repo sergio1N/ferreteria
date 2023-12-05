@@ -14,6 +14,11 @@ class pedidoController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     //admin
+     public function pedidoadmin(){
+        return view('roles/admin/pedidoadmin');
+     }
     public function index()
     {
         $pedido = DB::table('pedido')

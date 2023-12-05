@@ -1,5 +1,9 @@
-@extends('layauds.base')
-@section('contenido')
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<br>
+<br>
+<br>
+<br>
     <!-- Modal agregar -->
     <div class="modal fade" id="marcanueba" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

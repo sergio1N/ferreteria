@@ -13,6 +13,10 @@ class proveedorController extends Controller
      * Display a listing of the resource.
      */
 
+     //admin
+     public function proveadmin(){
+        return view('roles/admin/proveedoradmin');
+     }
      public function index()
      {
          $proveedor = DB::table('departamento')

@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('principal');
+Route::get('/home', function () {
+    return view('home');
 });
 
 //producto/
@@ -39,6 +39,16 @@ Route::get('/', [productosController::class,'mostrarProductos'])->name('producto
 Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.vista');
 //mostrar producto con filtros y buscador
 Route::get('/prodfiltro', [ProductosController::class, 'mostrarfiltro'])->name('productos.filtro');
+//manejar filtro de productos
+Route::post('/buscar-productos', [ProductosController::class, 'buscar'])->name('buscar.productos');
+
+///admin
+Route::get('/productosAdmin', [ProductosController::class, 'createadmin'])->name('productosadmin.agregar');
+Route::get('/proveedoresAdmin', [proveedorcontroller::class, 'proveadmin'])->name('proveedoresadmin.agregar');
+Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('pedidoadmin.agregar');
+
+
+
 
 
 

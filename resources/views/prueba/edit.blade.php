@@ -1,5 +1,9 @@
-@extends('layauds.base')
-@section('contenido')
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<br>
+<br>
+<br>
+<br>
   <form action="{{ route('producto.update', $producto->idproducto) }}" method="POST">
     @csrf
     @method('PUT')

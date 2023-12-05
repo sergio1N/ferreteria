@@ -18,20 +18,61 @@ class productosController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+
+     //admin
+     public function createadmin(){
+        return view('roles/admin/productosadmin');
+     }
     public function mostrarProductos()
     {
         $productos = Producto::with('marca')->take(6)->get();
         return view('principal', compact('productos'));
     }
     public function mostrarfiltro()
-{
-    $marcas = marca::orderBy('nombre')->get();
-    $categorias = Categoria::orderBy('nombre')->get();
-    $product = Producto::get();
-    return view('roles/usuario/profiltro', compact('product','categorias','marcas'));
-}
+    {
+        $marcas = marca::orderBy('nombre')->get();
+        $categorias = Categoria::orderBy('nombre')->get();
+        $product = Producto::get();
+        return view('roles/usuario/profiltro', compact('product', 'categorias', 'marcas'));
+    }
 
-    
+    public function buscar(Request $request)
+    {
+        // Recibir los filtros desde el formulario
+        $categoria = $request->input('categorias');
+        $marca = $request->input('marcas');
+        $precio = $request->input('precio');
+
+        // Consulta inicial de productos (sin filtrar)
+        $query = Producto::query();
+
+        // Aplicar filtros si se seleccionaron opciones válidas
+        if ($categoria !== 'Todos') {
+            $query->where('idcategoria', $categoria);
+        }
+
+        if ($marca !== 'Todos') {
+            $query->whereHas('marca', function ($query) use ($marca) {
+                $query->where('nombre', $marca);
+            });
+        }
+
+        if ($precio === 'asc') {
+            $query->orderBy('precio', 'asc');
+        } elseif ($precio === 'desc') {
+            $query->orderBy('precio', 'desc');
+        }
+
+        // Obtener los resultados de la búsqueda
+        $resultados = $query->get();
+
+        // Retornar los resultados como JSON
+        return response()->json($resultados);
+    }
+
+
     public function index()
     {
         return view('iniciologin');
@@ -111,21 +152,21 @@ class productosController extends Controller
     public function show($id)
     {
         $producto = Producto::find($id); // Obtener el producto por su ID
-    
+
         // Obtener la categoría del producto actual
         $categoriaProductoActual = $producto->idcategoria;
-    
+
         // Obtener productos de la misma categoría excluyendo el producto actual
         $productosRelacionados = Producto::where('idproducto', '!=', $producto->idproducto)
             ->where('idcategoria', $categoriaProductoActual)
             ->get();
-    
+
         return view('roles/usuario/productos', compact('producto', 'productosRelacionados'));
     }
-    
-    
 
-    
+
+
+
 
     /**
      * Show the form for editing the specified resource.

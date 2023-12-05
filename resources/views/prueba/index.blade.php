@@ -1,7 +1,10 @@
-@extends('layauds.base')
-
-@section('contenido')
-    <a href=""><button>ingresar producto</button></a>
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<br>
+<br>
+<br>
+<br>
+    <a href="{{ route('productos.agregar') }}"><button>ingresar producto</button></a>
     <input type="search" id="buscador" placeholder="buscar por nombre o id" class="form-control form-control-sm">
 
     <main>

@@ -18,6 +18,10 @@ class Producto extends Model
     {
         return $this->belongsTo(Marca::class, 'idmarca');
     }
+    public function productos()
+    {
+        return $this->hasMany(Producto::class, 'idcategoria'); // 'idcategoria' es la clave foránea en 'producto'
+    }
 
     public function categoria()
     {
