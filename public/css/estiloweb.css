@@ -44,7 +44,8 @@ body {
 }
 
 header {
-    position: fixed;
+    height: 100px;
+    position: relative;
     width: 100%;
     top: 0;
     right: 0;
@@ -379,7 +380,7 @@ header {
 
 /* footer */
 .footer {
-    max-width: 968px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     display: grid;
@@ -403,7 +404,7 @@ header {
 }
 
 .social {
-    display: felx;
+    display: flex;
     align-items: center;
     column-gap: 0.
     5rem;

@@ -20,9 +20,18 @@ class productosController extends Controller
      */
     public function mostrarProductos()
     {
-        $productos = Producto::take(6)->get();
+        $productos = Producto::with('marca')->take(6)->get();
         return view('principal', compact('productos'));
     }
+    public function mostrarfiltro()
+{
+    $marcas = marca::orderBy('nombre')->get();
+    $categorias = Categoria::orderBy('nombre')->get();
+    $product = Producto::get();
+    return view('roles/usuario/profiltro', compact('product','categorias','marcas'));
+}
+
+    
     public function index()
     {
         return view('iniciologin');
@@ -40,10 +49,10 @@ class productosController extends Controller
 
         return view('agregarproducto', compact('marcas', 'categorias', 'estanterias'));
 
-        
+
     }
 
- 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -55,10 +64,10 @@ class productosController extends Controller
             'categoria' => 'required',
             'nombre' => 'required',
             'estanteria' => 'required',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'precio' => 'required',
             'unidadm' => 'nullable',
-            'medida' => 'nullable', 
+            'medida' => 'nullable',
             'descripcion' => 'required',
             'stock' => 'required',
             'caracteristicas' => 'required',
@@ -99,10 +108,24 @@ class productosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($id)
     {
-        return view('roles.usuario.productos');
+        $producto = Producto::find($id); // Obtener el producto por su ID
+    
+        // Obtener la categoría del producto actual
+        $categoriaProductoActual = $producto->idcategoria;
+    
+        // Obtener productos de la misma categoría excluyendo el producto actual
+        $productosRelacionados = Producto::where('idproducto', '!=', $producto->idproducto)
+            ->where('idcategoria', $categoriaProductoActual)
+            ->get();
+    
+        return view('roles/usuario/productos', compact('producto', 'productosRelacionados'));
     }
+    
+    
+
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -111,20 +134,20 @@ class productosController extends Controller
     {
         //
         $producto = busquedapro::findOrfail($id);
-        return view('prueba/edit', ['producto'=>$producto]);
+        return view('prueba/edit', ['producto' => $producto]);
 
     }
 
     /**
-         * Update the specified resource in storage.
-         */
-   public function update(Request $request, $id)
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
     {
 
         $producto = busquedapro::find($id);
 
         if (!$producto) {
-          
+
             return redirect()->route('busquedapro.index')->with('error', 'Producto no encontrado');
         }
 
@@ -139,16 +162,15 @@ class productosController extends Controller
         // Redirigir a alguna vista de éxito o a donde desees
         return redirect()->route('busquedapro.index')->with('success', 'Producto actualizado con éxito');
     }
-  /**
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         //
-    }  
+    }
 
 
 
 }
 
-  

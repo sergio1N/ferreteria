@@ -1,6 +1,6 @@
 @extends('layauds.base')
 @section('contenido')
-    <br><br><br><br><br>
+    
     {{-- home --}}
     <section class="home swiper" id="home">
         <div class="swiper-wrapper">
@@ -87,20 +87,22 @@
     <section class="products" id="products">
         <div class="heading">
             <h1>Nuestros <br><span>productos</span></h1>
-            <a href="{{ route('productos.vista') }}" class="boton">Mirar más<i class='bx bx-right-arrow-alt'></i></a>
+            <a href="{{route('productos.filtro')}}" class="boton">Mirar más<i class='bx bx-right-arrow-alt'></i></a>
         </div>
     </section>
     {{-- contenido de productos --}}
     <div class="products-conatiner">
         @foreach ($productos as $producto)
             <div class="box">
-                <img class="" src="{{ asset($producto->imagen) }}" alt="{{ $producto->nombre }}">
+                <a href="{{ route('productos.vista', ['id' => $producto->idproducto]) }}">
+                    <img class="" src="{{ asset($producto->imagen) }}" alt="{{ $producto->nombre }}">
+                </a>
                 <span>productos disponibles</span>
                 <h2>{{ $producto->nombre }}</h2>
                 <h3 class="price">${{ $producto->precio }} <span>{{ $producto->unidadmedida }}</span></h3>
                 <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
                     data-imagen="{{ asset($producto->imagen) }}" data-nombre="{{ $producto->nombre }}"
-                    data-descripcion="{{ $producto->descripcion }}"  data-precio="{{ $producto->precio}}"></i>
+                    data-descripcion="{{ $producto->descripcion }}" data-precio="{{ $producto->precio }}"></i>
                 <i class='bx bx-heart'></i>
                 <span class="discount">-25%</span>
             </div>
@@ -122,14 +124,17 @@
                         <div class="col-md-6">
                             <img id="productoImagen" src="#" alt="Producto">
                             <!--  más detalles del producto -->
-                            <button id="masDetalles" class="btn btn-primary" >Detalles del producto</button>
+                            <a href="{{ route('productos.vista', ['id' => $producto->idproducto]) }}">
+                                <button id="masDetalles" class="btn btn-primary">Más Detalles</button>
+                            </a>
+
                         </div>
                         <div class="col-md-6">
                             <!-- Información del producto -->
                             <h4 id="productoNombre"></h4>
                             <p id="productoDescripcion"></p>
                             <p>Precio: $<span id="productoPrecio"></span></p>
-                            <p>Unidad de medida: <span id="productoUnidadMedida"></span></p>
+                            <p> medida: <span id="productoUnidadMedida"></span></p>
                             <p>Total: $<span id="productoTotal">0</span></p>
                             <!-- Contador de cantidad -->
                             <div class="input-group mb-3">
@@ -144,7 +149,8 @@
                                         type="button">+</button>
                                 </div>
                             </div>
-                            <button id="agregarCarrito" class="btn btn-success">Agregar al carrito ‎ <i class='bx bx-cart-alt'></i></button>
+                            <button id="agregarCarrito" class="btn btn-success">Agregar al carrito ‎ <i
+                                    class='bx bx-cart-alt'></i></button>
                         </div>
                     </div>
                 </div>

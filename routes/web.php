@@ -36,7 +36,10 @@ Route::get('/iniciologin', [ProductosController::class, 'index'])->name('product
 //mostrar producto cliente inicio
 Route::get('/', [productosController::class,'mostrarProductos'])->name('productos-mostrar');
 //mostar productos vista
-route::get('/vistapro',[productosController::class,'show'])->name('productos.vista');
+Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.vista');
+//mostrar producto con filtros y buscador
+Route::get('/prodfiltro', [ProductosController::class, 'mostrarfiltro'])->name('productos.filtro');
+
 
 
 //crear marca
