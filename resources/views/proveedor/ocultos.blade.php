@@ -1,7 +1,8 @@
 @extends('layauds.base')
 
 @section('contenido')
-    <h3>Proveedores Deshabilitados</h3>
+
+    <h3 style="margin-bottom: 100px";>Proveedores Deshabilitados</h3>
     <a href="{{route('proveedor.index')}}"><button>regresar</button></a>
     <table class="producto">
         <thead>
