@@ -125,24 +125,46 @@
     </main>
 
     <section class="container-related-products">
-        <h2>Productos Relacionados</h2>
-        <div class="products-conatiner">
-            @foreach ($productosRelacionados as $productoRelacionado)
-            <div class="box">
-                <a href="{{ route('productos.vista', ['id' => $productoRelacionado->idproducto]) }}">
-                    <img class="" src="{{ asset($productoRelacionado->imagen) }}" alt="{{ $productoRelacionado->nombre }}">
-                </a>
-                <span>productos disponibles</span>
-                <h2>{{ $productoRelacionado->nombre }}</h2>
-                <h3 class="price">${{ $productoRelacionado->precio }} <span>{{ $productoRelacionado->unidadmedida }}</span></h3>
-                <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
-                    data-imagen="{{ asset($productoRelacionado->imagen) }}" data-nombre="{{ $productoRelacionado->nombre }}"
-                    data-descripcion="{{ $productoRelacionado->descripcion }}" data-precio="{{ $productoRelacionado->precio }}"></i>
-                <i class='bx bx-heart'></i>
-                <span class="discount">-25%</span>
+        @if ($productosRelacionados->isEmpty())
+            <h2>Más de nuestros productos</h2>
+            <div class="products-conatiner">
+                @foreach ($random as $productoRandom)
+                    <div class="box">
+                        <a href="{{ route('productos.vista', ['id' => $productoRandom->idproducto]) }}">
+                            <img class="" src="{{ asset($productoRandom->imagen) }}" alt="{{ $productoRandom->nombre }}">
+                        </a>
+                        <span>Productos disponibles</span>
+                        <h2>{{ $productoRandom->nombre }}</h2>
+                        <h3 class="price">${{ $productoRandom->precio }} <span>{{ $productoRandom->unidadmedida }}</span></h3>
+                        <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
+                            data-imagen="{{ asset($productoRandom->imagen) }}" data-nombre="{{ $productoRandom->nombre }}"
+                            data-descripcion="{{ $productoRandom->descripcion }}" data-precio="{{ $productoRandom->precio }}"></i>
+                        <i class='bx bx-heart'></i>
+                        <span class="discount">-25%</span>
+                    </div>
+                @endforeach
             </div>
-            @endforeach
-        </div>
+        @else
+            <h2>Más productos como este</h2>
+            <div class="products-conatiner">
+                @foreach ($productosRelacionados as $productoRelacionado)
+                    <div class="box">
+                        <a href="{{ route('productos.vista', ['id' => $productoRelacionado->idproducto]) }}">
+                            <img class="" src="{{ asset($productoRelacionado->imagen) }}" alt="{{ $productoRelacionado->nombre }}">
+                        </a>
+                        <span>Productos disponibles</span>
+                        <h2>{{ $productoRelacionado->nombre }}</h2>
+                        <h3 class="price">${{ $productoRelacionado->precio }} <span>{{ $productoRelacionado->unidadmedida }}</span></h3>
+                        <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
+                            data-imagen="{{ asset($productoRelacionado->imagen) }}" data-nombre="{{ $productoRelacionado->nombre }}"
+                            data-descripcion="{{ $productoRelacionado->descripcion }}" data-precio="{{ $productoRelacionado->precio }}"></i>
+                        <i class='bx bx-heart'></i>
+                        <span class="discount">-25%</span>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
     </section>
 
 

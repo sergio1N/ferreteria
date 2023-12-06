@@ -97,7 +97,7 @@
                 <a href="{{ route('productos.vista', ['id' => $producto->idproducto]) }}">
                     <img class="" src="{{ asset($producto->imagen) }}" alt="{{ $producto->nombre }}">
                 </a>
-                <span>productos disponibles</span>
+               
                 <h2>{{ $producto->nombre }}</h2>
                 <h3 class="price">${{ $producto->precio }} <span>{{ $producto->unidadmedida }}</span></h3>
                 <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
