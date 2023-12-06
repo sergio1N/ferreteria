@@ -18,9 +18,10 @@
                 <td>{{ $pedido->proveedor->nombre }}</td>
                 <td>{{ \Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y H:i:s') }}</td>
                 <td>
-                    <a href="#" onclick="mostrarImagen('{{ asset('storage/' . $pedido->fotofactura) }}')">
-                        <img src="{{ url(Storage::disk('pedido')->url($pedido->fotofactura)) }}" alt="Imagen del Pedido">
+                    <a href="#" onclick="mostrarImagen('{{ Storage::disk('pedido')->url($pedido->fotofactura) }}')">
+                        <img src="{{ Storage::disk('pedido')->url($pedido->fotofactura) }}" alt="Imagen del Pedido">
                     </a>
+                                        
                 </td>
             </tr>
         @endforeach
