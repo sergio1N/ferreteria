@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\busquedapro;
 use App\Models\esta;
 use DB;
+use PDF;
+use Carbon\Carbon;
+use App\Models\DetalleFactura;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 
 
@@ -95,4 +99,72 @@ class BusquedaproController extends Controller
     {
         //
     }
+
+    // En BusquedaproController
+public function mostrarInformeGeneral()
+{
+    $productos = busquedapro::all();
+
+    return view('prueba.informe_general', compact('productos'));
+}
+
+
+    public function mostrarInforme($id)
+{
+    $producto = busquedapro::findOrFail($id);
+    $detalles = detalleFactura::where('idproducto', $id)->get();
+
+    return view('prueba.informe', compact('producto', 'detalles'));
+}
+
+
+
+public function generarInformePDF()
+{
+    // Obtén todos los productos con sus detalles de factura
+    $productos = Busquedapro::with('detallesFactura')->get();
+
+    // Array para almacenar los datos del informe
+    $informe = [];
+
+    // Variable para almacenar la suma total de ventas
+    $totalVentas = 0;
+
+    // Itera sobre cada producto para obtener la información requerida
+    foreach ($productos as $producto) {
+        $nombre = $producto->nombre;
+        $cantidadStock = $producto->stock;
+
+        // Obtén la cantidad vendida en las últimas 24 horas usando la relación
+        $cantidadVendida = $producto->detallesFactura
+            ->where('created_at', '>=', Carbon::now()->subDay())
+            ->sum('cantidad');
+
+        // Calcula el valor total de esas ventas
+        $valorTotalVentas = $cantidadVendida * $producto->precio;
+
+        // Almacena los datos en el array del informe
+        $informe[] = [
+            'nombre' => $nombre,
+            'cantidadStock' => $cantidadStock,
+            'cantidadVendida' => $cantidadVendida,
+            'valorTotalVentas' => $valorTotalVentas,
+        ];
+
+        // Agrega el valor total de ventas al total general
+        $totalVentas += $valorTotalVentas;
+    }
+
+    // Comparte los datos con la vista de informe en PDF
+    $data = [
+        'informe' => $informe,
+        'totalVentas' => $totalVentas,
+    ];
+
+    $pdf = PDF::loadView('prueba.informe_pdf', $data);
+
+    // Descarga el archivo PDF
+    return $pdf->stream();
+}
+
 }

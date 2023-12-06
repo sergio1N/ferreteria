@@ -1,18 +1,41 @@
 @extends('layauds.base')
-@section('contenido')
 
-<link rel="stylesheet" href="{{ asset('css/detallepedido.css') }}">
-@foreach($pedido as $pedid)
-    <div class="detalle-pedido">
-        <h2>Detalles del Pedido </h2>
-        <div class="detalle-info">
-            <p><strong>Producto:</strong> {{ $pedid->producto }}</p>
-            <p><strong>Foto:</strong> {{ $pedid->foto }}</p>
-            <p><strong>Descripción:</strong> {{ $pedid->descripcion }}</p>
-            <p><strong>Precio:</strong> {{ $pedid->precio }}</p>
-            <p><strong>Cantidad:</strong> {{ $pedid->cantidad }}</p>
-            <p><strong>Valor Total:</strong> {{ $pedid->valortotal }}</p>
+@section('content')
+    <h1>Crear Detalle de Pedido</h1>
+
+    <form action="{{ route('detallepedido.store') }}" method="POST">
+        @csrf
+
+        <div>
+            <label for="idpedido">ID del Pedido:</label>
+            <input type="text" id="idpedido" name="idpedido" value="{{ $pedido->id }}" readonly>
         </div>
-    </div>
-@endforeach
+
+        <div>
+            <label for="idproducto">ID del Producto:</label>
+            <input type="text" id="idproducto" name="idproducto" required>
+        </div>
+
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+        </div>
+
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required>
+        </div>
+
+        <div>
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" required>
+        </div>
+
+        <div>
+            <label for="valortotal">Valor Total:</label>
+            <input type="number" id="valortotal" name="valortotal" required>
+        </div>
+
+        <button type="submit">Guardar Detalle de Pedido</button>
+    </form>
 @endsection

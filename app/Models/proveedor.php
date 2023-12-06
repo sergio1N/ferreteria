@@ -11,4 +11,5 @@ class proveedor extends Model
     protected $table = 'proveedor';
     protected $fillable = ['idproveedor','iddepartamento','idciudad','nombre','telefono','direccion','nit','correo'];
     protected $primaryKey = 'idproveedor';
+    
 }

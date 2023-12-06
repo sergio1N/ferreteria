@@ -11,5 +11,9 @@ class detalleFactura extends Model
     protected $table = 'detallefactura';
     protected $fillable = ['iddetallefactura','idfactura','idproducto','cantidad','precio','unidadmedida','cantidadmedida'];
     protected $primaryKey = 'iddetallefactura';
+    public function producto()
+    {
+        return $this->belongsTo(Busquedapro::class, 'idproducto', 'idproducto');
+    }
 }
 

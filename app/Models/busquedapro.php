@@ -12,5 +12,8 @@ class busquedapro extends Model
     protected $fillable = ['idproducto','idmarca', 'idcategoria', 'idpersona', 'idestanteria','nombre','imagen','precio',
     'unidadmedida','cantidadmedida','descripcion','stock','caracteristicas','especificaciones'];
     protected $primaryKey = 'idproducto';
+    public function detallesFactura()
+    {
+        return $this->hasMany(DetalleFactura::class, 'idproducto', 'idproducto');
+    }
 }
-

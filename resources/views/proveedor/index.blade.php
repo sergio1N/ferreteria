@@ -1,12 +1,19 @@
 @extends('roles.admin.homeAdmin')
 @section('adminContenido')
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <br>
 <br>
 <br>
 <br>
+<br>
+<!-- Bootstrap JS (Popper.js y Bootstrap JS) -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Modal agregar -->
-    <div class="modal fade" id="marcanueba" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div id="marcanueba" class="modal fade modalmask movedown " style="padding-top: 0 !important;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo proveedor</h1>
@@ -26,10 +33,6 @@
                                 </select>
                                 
                             </div>
-                            
-                            
-                            
-
                             <div>
                                 <label for="ciudad">Ciudad</label>
                                 <select id="ciudad" name="idciudad" required>
@@ -78,7 +81,7 @@
 
     </div>
     </div><br>
-    <a data-bs-toggle="modal" data-bs-target="#marcanueba"><button value="nueva">nuevo proveedor</button></a>
+    <a data-bs-toggle="modal" data-bs-target="#marcanueba"><button value="nueva">Nuevo proveedor</button></a>
     <table class="producto">
         <a href="{{ route('proveedores-ocultos') }}"> <button>Ver Proveedores Deshabilitados</button> </a>
 

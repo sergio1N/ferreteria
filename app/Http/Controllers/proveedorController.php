@@ -34,36 +34,12 @@ class proveedorController extends Controller
              )
              ->where('proveedor.visible', true) // Filtra solo proveedores visibles
              ->orderBy('idproveedor', 'ASC')
-             ->paginate(5);
+             ->paginate(10);
      
          $departamento = departamento::orderBy('nombre')->get();
          $ciudad = ciudad::orderBy('nombre')->get();
      
          return view('proveedor.index', compact('proveedor', 'departamento', 'ciudad'));
-     }
-     public function nombre()
-     {
-         $proveedor = DB::table('departamento')
-             ->join('proveedor', 'proveedor.iddepartamento', '=', 'departamento.iddepartamento')
-             ->join('ciudad', 'proveedor.idciudad', '=', 'ciudad.idciudad')
-             ->select(
-                 'proveedor.idproveedor as idproveedor', 
-                 'departamento.iddepartamento', 'departamento.nombre as departamento',    
-                 'ciudad.idciudad', 'ciudad.nombre as ciudad', 
-                 'proveedor.nombre as nombre',
-                 'proveedor.telefono as telefono',
-                 'proveedor.direccion as direccion',
-                 'proveedor.nit as nit',
-                 'proveedor.correo as correo',
-             )
-             ->where('proveedor.visible', true) // Filtra solo proveedores visibles
-             ->orderBy('idproveedor', 'ASC')
-             ->paginate(5);
-     
-         $departamento = departamento::orderBy('nombre')->get();
-         $ciudad = ciudad::orderBy('nombre')->get();
-     
-         return view('pedido.proveedores', compact('proveedor', 'departamento', 'ciudad'));
      }
      
      public function hide($idproveedor)
@@ -110,30 +86,26 @@ public function showHidden($idproveedor)
     public function store(Request $request)
     {
         $request->validate([
-            'iddepartamento' => 'required',
-            'idciudad' => 'required',
             'nombre' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
             'nit' => 'required',
-            'correo' => 'required|email', 
+            'correo' => 'required|email',
         ]);
-        
-
-        // Ajusta el nombre del modelo a 'Proveedor'
-        $proveedor = proveedor::create([
-            'nombre' => $request->input('nombre'),
-            'telefono' => $request->input('telefono'),
-            'direccion' => $request->input('direccion'),
-            'nit' => $request->input('nit'),
-            'correo' => $request->input('correo'),
-            'iddepartamento' => $request->input('iddepartamento'),
-            'idciudad' => $request->input('idciudad'),
+    
+        $nuevoProveedor = Proveedor::create([
+            'nombre' => $request->nombre,
+            'telefono' => $request->telefono,
+            'direccion' => $request->direccion,
+            'nit' => $request->nit,
+            'correo' => $request->correo,
+            'iddepartamento' => $request->iddepartamento,
+            'idciudad' => $request->idciudad,
         ]);
-
-        return redirect()->route('proveedor.index')->with('success', 'Proveedor creado exitosamente');
-
+    
+        return back()->with('success', 'Proveedor creado exitosamente');
     }
+     
     public function showHiddenIndex()
     {
         $proveedorOcultos = DB::table('departamento')
@@ -172,7 +144,21 @@ public function showHidden($idproveedor)
      */
     public function show(string $id)
     {
-        //
+        $proveedor = DB::table('proveedor')->where('nombre', $id)->first();
+    
+        $pedidos = DB::table('pedido')
+            ->join('proveedor', 'pedido.idproveedor', '=', 'proveedor.idproveedor')
+            ->select(
+                'pedido.idpedido as idpedido',
+                'proveedor.idproveedor',
+                'proveedor.nombre as proveedor',
+                'pedido.fotofactura as foto'
+            )
+            ->where('proveedor.idproveedor', $proveedor->idproveedor)
+            ->orderBy('idpedido', 'ASC')
+            ->get();
+    
+        return view('pedido.index', ['pedido' => $pedidos, 'proveedor' => $proveedor]);
     }
 
     /**

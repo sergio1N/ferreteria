@@ -11,4 +11,15 @@ class pedido extends Model
     protected $table = 'pedido';
     protected $fillable = ['idpedido','idproveedor','fotofactura'];
     protected $primaryKey = 'idpedido';
+
+
+public function proveedor()
+{
+    return $this->belongsTo(Proveedor::class, 'idproveedor');
+}
+public function detalles()
+{
+    return $this->hasMany(DetallePedido::class, 'idpedido');
+}
+
 }
