@@ -100,9 +100,9 @@
             </div>
             <div class="footer-box">
                 <h2>informacion</h2>
-               <p>pende</p>
+               <p>pendiente</p>
                <form action="">
-                <input type="email" name="" id="" placeholder="hola">
+                <input type="email" name="" id="" placeholder="acceder a promociones">
                 <i class='bx bx-arrow-back bx-rotate-180' ></i>
                </form>
             </div>

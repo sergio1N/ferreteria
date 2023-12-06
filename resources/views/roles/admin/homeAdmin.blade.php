@@ -38,8 +38,8 @@
                     <li><a href="{{ route('proveedoresadmin.agregar') }}" onclick="seleccionar()">PROVEEDOR</a></li>
                     <li><a href="{{ route('pedidoadmin.agregar') }}" onclick="seleccionar()">PEDIDOS</a></li>
                     <li><a href="#curriculum" onclick="seleccionar()">MARCAS</a></li>
-                    <li><a href="#portfolio" onclick="seleccionar()">PORTFOLIO</a></li>
-                    <li><a href="#contacto" onclick="seleccionar()">CONTACTO</a></li>
+                    <li><a href="#portfolio" onclick="seleccionar()"></a></li>
+                    <li><a href="#contacto" onclick="seleccionar()"></a></li>
                 </ul>
             </nav>
             <div class="nav-responsive" onclick="mostrarOcultarMenu()">
