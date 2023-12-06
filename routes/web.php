@@ -11,6 +11,7 @@
     use App\Http\Controllers\roles\contableAuthController;
     use App\Http\Controllers\roles\almacenistaAuthController;
     use App\Http\Controllers\roles\invitadoAuthController;
+    use App\Http\Controllers\PedidoDetalleController;
     use Illuminate\Support\Facades\Route;
 
 
@@ -158,8 +159,9 @@ Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('ped
 
     // Rutas para gestionar detalles de pedido
     Route::get('/detallepedido/create', [PedidoDetalleController::class, 'create'])->name('detallepedido.create');
-    Route::post('/detallepedido/store', [PedidoDetalleController::class, 'store'])->name('detallepedido.store');
-
+    Route::post('/detallepedido/store', [PedidoDetalleController::class, 'store'])->name('detallepedido.store'); 
+    Route::get('/pedidos/proveedor/{idProveedor}', [PedidoDetalleController::class, 'detallePedidosPorProveedor'])->name('pedidos.por_proveedor');
+    
     //categoria////////////////////////////////////////////////////
     //crear categoria
     route::post('/productos/agregar5',[categoriaController::class,'store'])->name('categoria.store');

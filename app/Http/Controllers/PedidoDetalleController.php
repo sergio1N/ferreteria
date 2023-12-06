@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\detallePedido;
+use App\Models\Proveedor;
 
 class PedidoDetalleController extends Controller
 {
@@ -97,4 +98,18 @@ class PedidoDetalleController extends Controller
     {
         //
     }
-}
+
+
+    
+        public function detallePedidosPorProveedor($idProveedor)
+        {
+            $proveedor = Proveedor::findOrFail($idProveedor);
+    
+            // Obtén los pedidos del proveedor con detalles
+            $pedidos = Pedido::with('detalles')->where('idproveedor', $idProveedor)->get();
+    
+            return view('pedido.detalle', compact('proveedor', 'pedidos'));
+        }
+    }
+
+
