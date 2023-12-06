@@ -8,7 +8,7 @@
             <div class="swiper-slide container">
                 <div class="home-text">
                     <span>aqui span</span>
-                    <h1>lo que sea que vaya a poner mientras este bueno y delicadamente rico y aceptable</h1>
+                    <h1>contenido slider</h1>
                     <a href="#" class="boton">Ir<i class='bx bx-right-arrow-alt'></i></a>
 
                 </div>
@@ -18,8 +18,8 @@
             <div class="swiper-slide container">
                 <div class="home-text">
                     <span>aqui span</span>
-                    <h1>lo que sea que vaya a poner</h1>
-                    <a href="#" class="boton">ir a esta vaina<i class='bx bx-right-arrow-alt'></i></a>
+                    <h1>contenido numero 2</h1>
+                    <a href="#" class="boton"><i class='bx bx-right-arrow-alt'></i></a>
                 </div>
                 <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
             </div>
@@ -27,8 +27,8 @@
             <div class="swiper-slide container">
                 <div class="home-text">
                     <span>aqui span</span>
-                    <h1>lo que sea que vaya a poner</h1>
-                    <a href="" class="boton">ir a esta vaina<i class='bx bx-right-arrow-alt'></i></a>
+                    <h1>contenido numero 3 </h1>
+                    <a href="" class="boton">visitar<i class='bx bx-right-arrow-alt'></i></a>
                 </div>
                 <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
             </div>
