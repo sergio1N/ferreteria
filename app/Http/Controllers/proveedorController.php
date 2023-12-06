@@ -13,6 +13,10 @@ class proveedorController extends Controller
      * Display a listing of the resource.
      */
 
+     //admin
+     public function proveadmin(){
+        return view('roles/admin/proveedoradmin');
+     }
      public function index()
      {
          $proveedor = DB::table('departamento')
@@ -30,7 +34,7 @@ class proveedorController extends Controller
              )
              ->where('proveedor.visible', true) // Filtra solo proveedores visibles
              ->orderBy('idproveedor', 'ASC')
-             ->paginate(5);
+             ->paginate(10);
      
          $departamento = departamento::orderBy('nombre')->get();
          $ciudad = ciudad::orderBy('nombre')->get();

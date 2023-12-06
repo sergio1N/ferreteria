@@ -5,27 +5,31 @@
             <input type="text" id="buscador" placeholder="Buscar por nombre">
         </div>
         <br>
-        <select id="categorias">
-            <option value="">Todas las categorías</option>
-            @foreach ($categorias as $producto)
-                <option value="{{ $producto->nombre }}">{{ $producto->nombre }}</option>
-            @endforeach
-        </select>        
-        <select id="marcas">
-            <option value="">Todas las Marcas</option>
-            @foreach ($marcas as $marka)
-                <option value="{{ $marka->nombre }}">{{ $marka->nombre }}</option>
-            @endforeach
-        </select>    
-    
-        <select id="orden">
-            <option value="asc">Menor precio primero</option>
-            <option value="desc">Mayor precio primero</option>
-        </select>
-        <button id="btnBuscar">Buscar</button>
+        <form id="formBuscar" action="{{ route('buscar.productos') }}" method="POST">
+            @csrf
+            <select class="form-control" id="categorias" name="categorias">
+                <option value="Todos">Todas las categorías</option>
+                @foreach ($categorias as $producto)
+                    <option value="{{ $producto->nombre }}">{{ $producto->nombre }}</option>
+                @endforeach
+            </select>
+            <select class="form-control" id="marcas" name="marcas">
+                <option value="Todos">Todas las Marcas</option>
+                @foreach ($marcas as $marka)
+                    <option value="{{ $marka->nombre }}">{{ $marka->nombre }}</option>
+                @endforeach
+            </select>
+
+            <select class="form-control" id="precio" name="precio">
+                <option value="Todos">Todos</option>
+                <option value="asc">Menor precio primero</option>
+                <option value="desc">Mayor precio primero</option>
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
     </div>
     {{-- contenido de productos --}}
-    <div class="products-conatiner">
+    <div class="products-conatiner" id="resultadobusqueda">
         @foreach ($product as $producto)
             <div class="box">
                 <a href="{{ route('productos.vista', ['id' => $producto->idproducto]) }}">
@@ -46,4 +50,5 @@
     <link rel="stylesheet" href="{{ asset('css/profiltro.css') }}">
     {{-- link to js --}}
     <script src="{{ asset('js/profiltro.js') }}"></script>
+
 @endsection

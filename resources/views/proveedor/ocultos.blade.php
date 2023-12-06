@@ -1,7 +1,9 @@
-@extends('layauds.base')
-
-@section('contenido')
-
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<br>
+<br>
+<br>
+<br>
     <h3 style="margin-bottom: 100px";>Proveedores Deshabilitados</h3>
     <a href="{{route('proveedor.index')}}"><button>regresar</button></a>
     <table class="producto">

@@ -1,5 +1,9 @@
-@extends('layauds.base')
-@section('contenido')
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<br>
+<br>
+<br>
+<br>
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/formularioagpro.css') }}">
     <!--javaScrip-->

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pedido; // Importa el modelo Pedido
+use App\Models\Pedido; 
+use Illuminate\Support\Facades\Storage; 
 use App\Models\Proveedor;
 
 class PedidoController extends Controller
@@ -11,6 +12,11 @@ class PedidoController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     //admin
+     public function pedidoadmin(){
+        return view('roles/admin/pedidoadmin');
+     }
     public function index()
     {
         // Utiliza paginate() para obtener una cantidad específica de pedidos por página
@@ -45,21 +51,40 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'idproveedor' => 'required|exists:proveedor,idproveedor',
-            'fotoFactura' => 'required|mimes:jpeg,png,pdf,doc,docx',
-        ]);
-    
-        // Procesa y almacena el pedido
-        $rutaArchivo = $request->file('fotoFactura')->store('archivos_pedidos');
-    
-        Pedido::create([
-            'idproveedor' => $request->idproveedor,
-            'fotofactura' => $rutaArchivo,
-        ]);
-    
-        return redirect()->route('pedidos.index')->with('success', 'Pedido agregado correctamente');
+        try {
+            $request->validate([
+                'idproveedor' => 'required|exists:proveedor,idproveedor',
+                'fotoFactura' => 'required|mimes:jpeg,png,pdf,doc,docx',
+            ]);
+
+            // Obtener el archivo de la solicitud
+            $archivo = $request->file('fotoFactura');
+
+            // Definir la carpeta de destino (puedes ajustarla según tus necesidades)
+            $carpetaDestino = 'imagenes/pedido/';
+
+            // Generar un nombre único para el archivo
+            $nombreArchivo = time() . '_' . $archivo->getClientOriginalName();
+
+            // Almacenar el archivo en el disco personalizado
+            Storage::disk('pedido')->putFileAs($carpetaDestino, $archivo, $nombreArchivo);
+
+            // Almacenar la información del pedido en la base de datos
+            Pedido::create([
+                'idproveedor' => $request->idproveedor,
+                'fotofactura' => $carpetaDestino . '/' . $nombreArchivo,
+            ]);
+
+            // Redirigir a la vista 'pedidos.index' con un mensaje de éxito y la variable $nombreArchivo
+            return redirect()->route('pedidos.index')->with(['success' => 'Pedido agregado correctamente', 'nombreArchivo' => $nombreArchivo]);
+        } catch (\Exception $e) {
+            // Redirigir de nuevo con un mensaje de error si ocurre una excepción
+            return redirect()->back()->with('error', 'Error al agregar el pedido: ' . $e->getMessage());
+        }
     }
+    
+    
+    
     
 
     /**

@@ -13,6 +13,7 @@
     use App\Http\Controllers\roles\invitadoAuthController;
     use Illuminate\Support\Facades\Route;
 
+
     /*
     |--------------------------------------------------------------------------
     | Web Routes
@@ -24,6 +25,40 @@
     |
     */
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+//producto/
+//mostrar vista agragar productos
+Route::get('/productos', [ProductosController::class, 'create'])->name('productos.agregar');
+//prueba de inicio de sesion
+Route::get('/iniciologin', [ProductosController::class, 'index'])->name('productos.index');
+
+//mostrar producto cliente inicio
+Route::get('/', [productosController::class,'mostrarProductos'])->name('productos-mostrar');
+//mostar productos vista
+Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.vista');
+//mostrar producto con filtros y buscador
+Route::get('/prodfiltro', [ProductosController::class, 'mostrarfiltro'])->name('productos.filtro');
+//manejar filtro de productos
+Route::post('/buscar-productos', [ProductosController::class, 'buscar'])->name('buscar.productos');
+
+///admin
+Route::get('/productosAdmin', [ProductosController::class, 'createadmin'])->name('productosadmin.agregar');
+Route::get('/proveedoresAdmin', [proveedorcontroller::class, 'proveadmin'])->name('proveedoresadmin.agregar');
+Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('pedidoadmin.agregar');
 
 
     Route::get('/home', function () {

@@ -29,6 +29,14 @@ return [
     */
 
     'disks' => [
+        // ...
+        'pedido' => [
+            'driver' => 'local',
+            'root' => public_path('imagenes/pedido/'),
+            'url' => env('APP_URL').'/imagenes/pedido/',
+            'visibility' => 'public',
+        ],
+    
 
         'local' => [
             'driver' => 'local',

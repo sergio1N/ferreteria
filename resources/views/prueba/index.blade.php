@@ -2,7 +2,15 @@
 
 @section('contenido')
     <a href="{{ route('productos.agregar') }}"><button>ingresar producto</button></a>
-    <a href="{{ route('generar.informe.pdf') }}" target="_blank"><button>informe de ventas</button></a>
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<br>
+<br>
+<br>
+<br>
+<a href="{{ route('generar.informe.pdf') }}" target="_blank"><button>informe de ventas</button></a>
+    <a href="{{ route('productos.agregar') }}"><button>ingresar producto</button></a>
+
     <input type="search" id="buscador" placeholder="buscar por nombre o id" class="form-control form-control-sm">
 
     <main>
