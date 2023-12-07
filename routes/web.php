@@ -61,6 +61,7 @@ Route::delete('/comprar-producto/{id}', [CarritoController::class, 'comprarProdu
 Route::get('/productosAdmin', [ProductosController::class, 'createadmin'])->name('productosadmin.agregar');
 Route::get('/proveedoresAdmin', [proveedorcontroller::class, 'proveadmin'])->name('proveedoresadmin.agregar');
 Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('pedidoadmin.agregar');
+Route::get('/inicioAdmin', [pedidocontroller::class, 'vamosinicio'])->name('inicio.admin');
 
 
 

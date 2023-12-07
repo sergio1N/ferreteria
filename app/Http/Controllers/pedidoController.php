@@ -14,6 +14,9 @@ class PedidoController extends Controller {
      */
 
     //admin
+    public function vamosinicio(){
+        return view('roles/admin/inicio');
+    }
     public function pedidoadmin() {
         return view('roles/admin/pedidoadmin');
     }
