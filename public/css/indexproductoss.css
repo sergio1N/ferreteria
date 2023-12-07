@@ -1,0 +1,123 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+main {
+    margin: 20px;
+}
+
+/* Estilos del botón Nuevo proveedor */
+button[value="nueva"] {
+    background-color: #1CB698;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[value="nueva"]:hover {
+    background-color: #147761;
+}
+
+/* Estilos de la tabla */
+table.producto {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table.producto th,
+table.producto td {
+    border: 1px solid #1CB698;
+    padding: 12px;
+    text-align: center;
+}
+
+table.producto th {
+    background-color: #1CB698;
+    color: white;
+}
+
+/* Estilos del botón "Ver Proveedores Deshabilitados" */
+a[href="{{ route('proveedores-ocultos') }}"] button {
+    background-color: #6C757D;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a[href="{{ route('proveedores-ocultos') }}"] button:hover {
+    background-color: #5A6268;
+}
+
+/* Estilos del botón "Deshabilitar" */
+button.btn-danger {
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.btn-danger:hover {
+    background-color: #C82333;
+}
+
+/* Estilos del formulario modal */
+.modal-content {
+    border: 1px solid #1CB698;
+    border-radius: 10px;
+}
+
+.modal-title {
+    color: #1CB698;
+}
+
+/* Estilos del botón "Crear" en el formulario modal */
+#btnCrearMarca {
+    background-color: #1CB698;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btnCrearMarca:hover {
+    background-color: #147761;
+}
+
+/* Estilos de la paginación */
+.pagination {
+    margin-top: 20px;
+}
+/* Otros estilos */
+
+/* Otros estilos */
+
+/* Otros estilos */
+
+.ver-proveedores-btn {
+    background-color: #1CB698; /* Utiliza el color principal */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.ver-proveedores-btn:hover {
+    background-color: #147761; /* Cambia el color al hacer hover */
+}
+
+
+

@@ -1,5 +1,7 @@
 @extends('roles.admin.homeAdmin')
 @section('adminContenido')
+    {{-- CSS --}}
+    <link rel="stylesheet" href="{{ asset('css/indexproductoss.css') }}">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <br>
@@ -83,8 +85,10 @@
     </div><br>
     <a data-bs-toggle="modal" data-bs-target="#marcanueba"><button value="nueva">Nuevo proveedor</button></a>
     <table class="producto">
-        <a href="{{ route('proveedores-ocultos') }}"> <button>Ver Proveedores Deshabilitados</button> </a>
-
+        <a href="{{ route('proveedores-ocultos') }}">
+            <button class="ver-proveedores-btn">Ver Proveedores Deshabilitados</button>
+        </a>
+        
         <thead>
             <tr>
                 <th>departamento</th>

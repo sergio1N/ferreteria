@@ -1,6 +1,7 @@
 @extends('roles.admin.homeAdmin')
 @section('adminContenido')
 <script src="{{ asset('js/agregarproducto.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/ocultosprovedores.css') }}">
 <main>
     <br>
     <br>

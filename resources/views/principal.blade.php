@@ -181,3 +181,18 @@
     {{-- link to js --}}
     <script src="{{ asset('js/swiper.js') }}"></script>
 @endsection
+<script>
+    function mostrarOcultarCantidad() {
+        var unidadMedida = document.getElementById('unidadm').value;
+        var medidaInput = document.getElementById('medida');
+        var labelMedida = document.getElementById('labelMedida');
+        
+        if (unidadMedida === 'unidades') {
+            medidaInput.style.display = 'block';
+            labelMedida.style.display = 'block';
+        } else {
+            medidaInput.style.display = 'none';
+            labelMedida.style.display = 'none';
+        }
+    }
+</script>

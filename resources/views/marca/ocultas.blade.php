@@ -1,6 +1,6 @@
 @extends('roles.admin.homeAdmin')
 @section('adminContenido')
-
+<link rel="stylesheet" href="{{ asset('css/ocultosprovedores.css') }}">
 <br>
 <br>
 <br>

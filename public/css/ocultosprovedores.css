@@ -1,0 +1,52 @@
+/* Otros estilos */
+
+/* Estilos para la tabla */
+.table-container {
+    margin-top: 20px;
+}
+
+.producto th,
+.producto td {
+    border: 1px solid #1CB698;
+    padding: 12px;
+    text-align: center;
+}
+
+.producto th {
+    background-color: #1CB698;
+    color: white;
+}
+
+/* Estilos para el botón "regresar" */
+button {
+    background-color: #1CB698;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #147761;
+}
+
+/* Estilos para el título */
+h3 {
+    color: #1CB698;
+    margin-bottom: 20px; /* Ajusta según sea necesario */
+}
+
+/* Estilos para el botón "Habilitar" */
+.btn-success {
+    background-color: #28a745; /* Cambiado a color verde de Bootstrap */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}

@@ -7,7 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- CSS --}}
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{ asset('css/estiloweb.css') }}">
+=======
+ <link rel="stylesheet" href="{{ asset('css/estiloweb.css') }}">
+>>>>>>> 0a1aa4643c4578d91e865a30da20d7cbcbc6b43f
     <script></script>
     {{-- caja de iconos --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
