@@ -17,7 +17,7 @@
             {{-- slide 1 --}}
             <div class="swiper-slide container">
                 <div class="home-text">
-                    <span>aqui span</span>
+                    <span>Lo mejor en precios y productos</span>
                     <h1>Bienvenido a ferreteria S&J</h1>
 
                 </div>
@@ -32,64 +32,10 @@
                 </div>
                 <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
             </div>
-            {{-- slide 3 --}}
-            <div class="swiper-slide container">
-                <div class="home-text">
-                    <span>aqui span</span>
-                    <h1>contenido numero 3 </h1>
-                    <a href="" class="boton">visitar<i class='bx bx-right-arrow-alt'></i></a>
-                </div>
-                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
-            </div>
 
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-    </section>
-    {{-- categoriass --}}
-    <section class="categories" id="categories">
-        <div class="heading">
-            <h1>explorar <br><span>categorias</span></h1>
-            <a href="#" class="boton">Mirar más<i class='bx bx-right-arrow-alt'></i></a>
-        </div>
-        {{-- container --}}
-        <div class="categories-container">
-            {{-- caja 1 --}}
-            <div class="box box1">
-                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
-                <h2>electricos</h2>
-                <span> items</span>
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            {{-- caja 2 --}}
-            <div class="box box2">
-                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
-                <h2>desternilladores</h2>
-                <span>22 items</span>
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            {{-- caja 3 --}}
-            <div class="box box3">
-                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
-                <h2>contruccion</h2>
-                <span>62 items</span>
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            {{-- caja 4 --}}
-            <div class="box box4">
-                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
-                <h2>baldosas</h2>
-                <span>62 items</span>
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-            {{-- caja 5 --}}
-            <div class="box box5">
-                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
-                <h2>alambrado</h2>
-                <span>12 items</span>
-                <i class='bx bx-right-arrow-alt'></i>
-            </div>
-        </div>
     </section>
 
     {{-- productos --}}
@@ -117,6 +63,51 @@
             </div>
         @endforeach
     </div>
+
+     {{-- categoriass --}}
+     <section class="categories" id="categories">
+        <div class="heading">
+            <h1>Explorar <br><span>categorias</span></h1>
+        </div>
+        {{-- container --}}
+        <div class="categories-container">
+            {{-- caja 1 --}}
+            <div class="box box1">
+                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
+                <h2>Electricos</h2>
+                <span>15 items</span>
+                <i class='bx bx-right-arrow-alt'></i>
+            </div>
+            {{-- caja 2 --}}
+            <div class="box box2">
+                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
+                <h2>Herramienta</h2>
+                <span>22 items</span>
+                <i class='bx bx-right-arrow-alt'></i>
+            </div>
+            {{-- caja 3 --}}
+            <div class="box box3">
+                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
+                <h2>Contruccion</h2>
+                <span>62 items</span>
+                <i class='bx bx-right-arrow-alt'></i>
+            </div>
+            {{-- caja 4 --}}
+            <div class="box box4">
+                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
+                <h2>Baldosas</h2>
+                <span>62 items</span>
+                <i class='bx bx-right-arrow-alt'></i>
+            </div>
+            {{-- caja 5 --}}
+            <div class="box box5">
+                <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">
+                <h2>Alambrado</h2>
+                <span>12 items</span>
+                <i class='bx bx-right-arrow-alt'></i>
+            </div>
+        </div>
+    </section>
 
     <!-- Modal -->
     <div class="modal fade" id="productoModal" tabindex="-1" role="dialog" aria-labelledby="productoModalLabel"

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- CSS --}}
-     {{-- <link rel="stylesheet" href="{{ asset('css/estiloweb.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('css/estiloweb.css') }}">
     <script></script>
     {{-- caja de iconos --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -59,7 +59,7 @@
                 // Hacer la solicitud para obtener la cantidad de productos en el carrito
                 $.ajax({
                     type: 'GET',
-                    url: '{{ route("carrito.cantidad") }}',
+                    url: '{{ route('carrito.cantidad') }}',
                     success: function(response) {
                         // Actualizar la burbuja del carrito con la cantidad obtenida
                         $('.cart-count').text(response.cantidad);
@@ -108,24 +108,24 @@
                 </div>
             </div>
             <div class="footer-box">
-                <h2>categorias</h2>
-                <a href="#">cositas</a>
-                <a href="#">cositas2</a>
-                <a href="#">cositas3</a>
-                <a href="#">cositas4</a>
+                <h2>Información</h2>
+                <a href="#">Datos personales</a>
+                <a href="#">¿Quienes Somos?</a>
+                <a href="#">Nuestras tiendas</a>
+                <a href="#">Servicio al cliente</a>
             </div>
             <div class="footer-box">
                 <h2>Enlaces</h2>
-                <a href="#">enlaces</a>
-                <a href="#">enlaces2</a>
-                <a href="#">enlaces3</a>
-                <a href="#">enlaces4</a>
+                <a href="#">NIT 800.242.106-2</a>
+                <a href="#">Términos y condiciones</a>
+                <a href="#">Mapa del sitio</a>
+                <a href="#">Trabaje para nosotros</a>
             </div>
             <div class="footer-box">
                 <h2>informacion</h2>
                 <p>pendiente</p>
                 <form action="">
-                    <input type="email" name="" id="" placeholder="acceder a promociones">
+                    <i class='bx bx-envelope'></i> <input type="email" name="" id="" placeholder="Acceder a promociones">
                     <i class='bx bx-arrow-back bx-rotate-180'></i>
                 </form>
             </div>
