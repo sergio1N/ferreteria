@@ -1,5 +1,12 @@
-@extends('layauds.base')
-@section('contenido')
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
     <h3>Marcas Ocultas</h3>
     <a href="{{route('marca.index')}}"><button>regresar</button></a>
     <table class="producto">

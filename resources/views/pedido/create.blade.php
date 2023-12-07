@@ -1,6 +1,5 @@
-@extends('layauds.base')
-
-@section('contenido')
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
     <link rel="stylesheet" href="{{ asset('css/detallepedido.css') }}">
 
     <h2>Realizar Nuevo Pedido</h2>

@@ -1,13 +1,16 @@
-@extends('layauds.base')
-
-@section('contenido')
-<link rel="stylesheet" href="{{ asset('css/pedido.css') }}">
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<br>
+<br>
+<br>
+<br>
+<link rel="stylesheet" href="{{ asset('css/provedorespedido.css') }}">
 <div class="table-container">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoPedido"> Agregar Pedido </button>
     <a href="{{ route('pedidos.index') }}" class="btn btn-primary">Ver Pedidos</a>
 
 <h1>Lista de Proveedores</h1>
-<ul>
+<ul class="lista-proveedores">
     @foreach($proveedores as $proveedor)
         @if($proveedor->visible)
             <li>

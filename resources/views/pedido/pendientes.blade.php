@@ -1,26 +1,39 @@
-@extends('layauds.base')
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
+<link rel="stylesheet" href="{{ asset('css/detallepedi.css') }}">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Detalles de Pedidos - {{ $proveedor->nombre }}</h1>
 
-@section('contenido')
-    <a href="{{ route('pedidos.pendientes') }}" class="btn btn-primary">Ver Pedidos Pendientes</a>
-    <h1>Lista de Pedidos</h1>
-
-    <table class="table">
+@if($pedido->detalles->isEmpty())
+    <p>No se han hecho detalles para este pedido.</p>
+@else
+    <h2>Detalles del Pedido</h2>
+    <table>
         <thead>
             <tr>
-                <th>Proveedor</th>
-                <th>Archivo</th>
-                <th>Fecha</th>
+                <th>ID Detalle</th>
+                <th>Descripción</th>
+                <!-- Agrega más encabezados según sea necesario -->
             </tr>
         </thead>
         <tbody>
-            @foreach($pedidos as $pedido)
+            @foreach($pedido->detalles as $detalle)
                 <tr>
-                    <td>{{ $pedido->proveedor->nombre }}</td>
-                    <td>{{ $pedido->nombre_archivo }}</td>
-                    <td>{{ \Carbon\Carbon::parse($pedido->created_at)->format('d/m/Y H:i:s') }}</td>
+                    <td>
+                        <input type="text" value="{{ $detalle->iddetallepedido }}" readonly>
+                    </td>
+                    <td>
+                        <input type="text" value="{{ $detalle->descripcion }}" readonly>
+                    </td>
+                    <!-- Agrega más celdas según sea necesario -->
                 </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $pedidos->links('pagination::bootstrap-4') }}
+@endif
 @endsection

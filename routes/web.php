@@ -1,30 +1,30 @@
-    <?php
-    use App\Http\Controllers\departamentoController;
-    use App\Http\Controllers\productosController;
-    use App\Http\Controllers\BusquedaproController;
-    use App\Http\Controllers\marcaController;
-    use App\Http\Controllers\proveedorcontroller;
-    use App\Http\Controllers\pedidocontroller;
-    use App\Http\Controllers\categoriaController;
-    use App\Http\Controllers\ProfileController;
-    use App\Http\Controllers\roles\adminAuthController;
-    use App\Http\Controllers\roles\contableAuthController;
-    use App\Http\Controllers\roles\almacenistaAuthController;
-    use App\Http\Controllers\roles\invitadoAuthController;
-    use App\Http\Controllers\PedidoDetalleController;
-    use Illuminate\Support\Facades\Route;
+<?php
+use App\Http\Controllers\departamentoController;
+use App\Http\Controllers\productosController;
+use App\Http\Controllers\BusquedaproController;
+use App\Http\Controllers\marcaController;
+use App\Http\Controllers\proveedorcontroller;
+use App\Http\Controllers\pedidocontroller;
+use App\Http\Controllers\categoriaController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\roles\adminAuthController;
+use App\Http\Controllers\roles\contableAuthController;
+use App\Http\Controllers\roles\almacenistaAuthController;
+use App\Http\Controllers\roles\invitadoAuthController;
+use App\Http\Controllers\PedidoDetalleController;
+use Illuminate\Support\Facades\Route;
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register web routes for your application. These
-    | routes are loaded by the RouteServiceProvider and all of them will
-    | be assigned to the "web" middleware group. Make something great!
-    |
-    */
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ Route::get('/productos', [ProductosController::class, 'create'])->name('producto
 Route::get('/iniciologin', [ProductosController::class, 'index'])->name('productos.index');
 
 //mostrar producto cliente inicio
-Route::get('/', [productosController::class,'mostrarProductos'])->name('productos-mostrar');
+Route::get('/', [productosController::class, 'mostrarProductos'])->name('productos-mostrar');
 //mostar productos vista
 Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.vista');
 //mostrar producto con filtros y buscador
@@ -62,140 +62,139 @@ Route::get('/proveedoresAdmin', [proveedorcontroller::class, 'proveadmin'])->nam
 Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('pedidoadmin.agregar');
 
 
-    Route::get('/home', function () {
-        return view('home');
+Route::get('/home', function () {
+    return view('home');
 
-    });
+});
 
-    Route::get('/roles/home', [departamentoController::class, 'index'])->name('home.agregar');
+Route::get('/roles/home', [departamentoController::class, 'index'])->name('home.agregar');
 
-    //producto/
-    //mostrar vista agragar productos
-    Route::get('/prueba/agregarproducto', [ProductosController::class, 'create'])->name('productos.agregar');
-    //prueba de inicio de sesion
-    Route::get('/iniciologin', [ProductosController::class, 'index'])->name('productos.index');
+//producto/
+//mostrar vista agragar productos
+Route::get('/prueba/agregarproducto', [ProductosController::class, 'create'])->name('productos.agregar');
+//prueba de inicio de sesion
+Route::get('/iniciologin', [ProductosController::class, 'index'])->name('productos.index');
 
-    //mostrar producto cliente inicio
-    Route::get('/', [productosController::class,'mostrarProductos'])->name('productos-mostrar');
-    //mostar productos vista
-    Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.vista');
-    //mostrar producto con filtros y buscador
-    Route::get('/prodfiltro', [ProductosController::class, 'mostrarfiltro'])->name('productos.filtro');
-    //reporte de ventas
-    Route::get('/mostrar-informe/{id}', [BusquedaproController::class, 'mostrarInforme'])->name('mostrar.informe');
+//mostrar producto cliente inicio
+Route::get('/', [productosController::class, 'mostrarProductos'])->name('productos-mostrar');
+//mostar productos vista
+Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('productos.vista');
+//mostrar producto con filtros y buscador
+Route::get('/prodfiltro', [ProductosController::class, 'mostrarfiltro'])->name('productos.filtro');
+//reporte de ventas
+Route::get('/mostrar-informe/{id}', [BusquedaproController::class, 'mostrarInforme'])->name('mostrar.informe');
 
-    Route::get('/mostrar-informe-general', [BusquedaproController::class, 'mostrarInformeGeneral'])
-        ->name('mostrar.informe.general');
+Route::get('/mostrar-informe-general', [BusquedaproController::class, 'mostrarInformeGeneral'])
+    ->name('mostrar.informe.general');
 
-        // Agrega esta ruta al archivo web.php
-    Route::get('/generar-informe-pdf', [BusquedaproController::class, 'generarInformePDF'])->name('generar.informe.pdf');
-
-
+// Agrega esta ruta al archivo web.php
+Route::get('/generar-informe-pdf', [BusquedaproController::class, 'generarInformePDF'])->name('generar.informe.pdf');
 
 
-    //crear marca
-    route::post('/productos/agregar4',[marcaController::class,'store'])->name('marca.store');
-    //crear categoria
-    route::post('/productos/agregar5',[categoriaController::class,'store'])->name('categoria.store');
-    //crear producto
-    route::post('/agregar/producto',[productosController::class,'store'])->name('crearpro.store');
 
-    // Ruta de búsqueda de productos
-    Route::get('/prueba/index', [BusquedaproController::class, 'index'])->name('busquedapro.index');
 
-    // Ruta para editar producto
-    Route::get('/prueba/edit/{id}', [BusquedaproController::class, 'edit'])->name('busquedapro.edit');
-    // ruta actualisar producto
-    Route::put('producto/actualizar/{idproducto}', [ProductosController::class, 'update'])->name('producto.update');
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//crear marca
+route::post('/productos/agregar4', [marcaController::class, 'store'])->name('marca.store');
+//crear categoria
+route::post('/productos/agregar5', [categoriaController::class, 'store'])->name('categoria.store');
+//crear producto
+route::post('/agregar/producto', [productosController::class, 'store'])->name('crearpro.store');
 
-    //marca/////////////////////////////////////////////////////////////////////////////
-    // ruta para la vista marca
-    Route::get('/marca/index', [marcaController::class, 'index'])->name('marca.index');
-    // Ruta para ocultar marca
-    Route::post('/marca/hide/{idmarca}', [marcaController::class, 'hide'])->name('marca.hide');
-    // Ruta para filtrar marcas 
-    Route::get('/marca/filter', [marcaController::class, 'filter'])->name('marca.filter');
-    // rutapara ver marcas ocultas
-    Route::get('/marcas-ocultas', [marcaController::class,'marcasOcultas'])->name('marcas.ocultas');
-    // colocar marcas visibles 
-    Route::post('/marcas/show/{idmarca}', [MarcaController::class, 'show'])->name('marca.show');
-    // Ruta para actualizar marca
-    Route::post('/marca/update/{idmarca}', [marcaController::class, 'update'])->name('marca.update');
-    // Ruta para editar marca
-    Route::get('/marca/edit/{idmarca}', [marcaController::class, 'edit'])->name('marca.edit');
-    //crear marca
-    route::post('/productos/agregar4',[marcaController::class,'store'])->name('marca.store');
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Ruta de búsqueda de productos
+Route::get('/prueba/index', [BusquedaproController::class, 'index'])->name('busquedapro.index');
 
-    //proveedores 
-    // ruta para la vista proebeedores
-    Route::get('/proveedor/index', [proveedorController::class, 'index'])->name('proveedor.index');
-    //crear proveedores
-    route::post('/proveedor/agregar',[proveedorController::class,'store'])->name('proveedor.store');
-    //pasar las listas deplegables
-    Route::get('/proveedor/create', [proveedorController::class, 'create'])->name('proveedor.create');
-    // desavilitar porveedor 
-    Route::put('/proveedor/hide/{idproveedor}', [proveedorController::class, 'hide'])->name('proveedor.hide');
-    //ruta preveedores ocultos 
-    Route::get('/proveedor/ocultos', [proveedorController::class, 'showHidden'])->name('proveedor.ocultos');
-    // ruta ocultos 
-    Route::put('/proveedor/show/{idproveedor}', [proveedorController::class, 'showHidden'])->name('proveedor.show');
-    //mostrar los prevedores ocultos 
-    Route::get('/proveedores-ocultos', [proveedorController::class, 'showHiddenIndex'])->name('proveedores-ocultos');
-    //Route::get('/pedido/provedores', [proveedorController::class, 'nombre'])->name('pedido.proveedores');
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Ruta para editar producto
+Route::get('/prueba/edit/{id}', [BusquedaproController::class, 'edit'])->name('busquedapro.edit');
+// ruta actualisar producto
+Route::put('producto/actualizar/{idproducto}', [ProductosController::class, 'update'])->name('producto.update');
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Rutas para mostrar proveedores y pedidos
-    Route::get('/proveedores', [PedidoController::class, 'mostrarProveedores'])->name('proveedores.index');
-    Route::get('/pedidos/{idProveedor}', [PedidoController::class, 'pedidosPorProveedor'])->name('pedidos.por_proveedor');
-    // Ruta para mostrar pedidos pendientes
-    Route::get('/pedidos/pendientes', [PedidoController::class, 'pendientes'])->name('pedidos.pendientes');
+//marca/////////////////////////////////////////////////////////////////////////////
+// ruta para la vista marca
+Route::get('/marca/index', [marcaController::class, 'index'])->name('marca.index');
+// Ruta para ocultar marca
+Route::post('/marca/hide/{idmarca}', [marcaController::class, 'hide'])->name('marca.hide');
+// Ruta para filtrar marcas 
+Route::get('/marca/filter', [marcaController::class, 'filter'])->name('marca.filter');
+// rutapara ver marcas ocultas
+Route::get('/marcas-ocultas', [marcaController::class, 'marcasOcultas'])->name('marcas.ocultas');
+// colocar marcas visibles 
+Route::post('/marcas/show/{idmarca}', [MarcaController::class, 'show'])->name('marca.show');
+// Ruta para actualizar marca
+Route::post('/marca/update/{idmarca}', [marcaController::class, 'update'])->name('marca.update');
+// Ruta para editar marca
+Route::get('/marca/edit/{idmarca}', [marcaController::class, 'edit'])->name('marca.edit');
+//crear marca
+route::post('/productos/agregar4', [marcaController::class, 'store'])->name('marca.store');
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Rutas para gestionar pedidos
-    Route::post('/pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
-    Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
-    Route::get('/pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
+//proveedores 
+// ruta para la vista proebeedores
+Route::get('/proveedor/index', [proveedorController::class, 'index'])->name('proveedor.index');
+//crear proveedores
+route::post('/proveedor/agregar', [proveedorController::class, 'store'])->name('proveedor.store');
+//pasar las listas deplegables
+Route::get('/proveedor/create', [proveedorController::class, 'create'])->name('proveedor.create');
+// desavilitar porveedor 
+Route::put('/proveedor/hide/{idproveedor}', [proveedorController::class, 'hide'])->name('proveedor.hide');
+//ruta preveedores ocultos 
+Route::get('/proveedor/ocultos', [proveedorController::class, 'showHidden'])->name('proveedor.ocultos');
+// ruta ocultos 
+Route::put('/proveedor/show/{idproveedor}', [proveedorController::class, 'showHidden'])->name('proveedor.show');
+//mostrar los prevedores ocultos 
+Route::get('/proveedores-ocultos', [proveedorController::class, 'showHiddenIndex'])->name('proveedores-ocultos');
+//Route::get('/pedido/provedores', [proveedorController::class, 'nombre'])->name('pedido.proveedores');
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Rutas para gestionar pedidos
+Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+Route::get('/pedidos/pendientes', [PedidoController::class, 'pendientes'])->name('pedidos.pendientes');
+Route::get('/pedidos/admitir/{idPedido}', [PedidoController::class, 'admitirForm'])->name('pedidos.admitir.form');
+Route::post('/pedidos/admitir/{idPedido}', [PedidoController::class, 'admitirPedido'])->name('pedidos.admitir');
+Route::get('/pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
+Route::post('/pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
 
-    // Rutas para gestionar detalles de pedido
-    Route::get('/detallepedido/create', [PedidoDetalleController::class, 'create'])->name('detallepedido.create');
-    Route::post('/detallepedido/store', [PedidoDetalleController::class, 'store'])->name('detallepedido.store'); 
-    Route::get('/pedidos/proveedor/{idProveedor}', [PedidoDetalleController::class, 'detallePedidosPorProveedor'])->name('pedidos.por_proveedor');
-    
-    //categoria////////////////////////////////////////////////////
-    //crear categoria
-    route::post('/productos/agregar5',[categoriaController::class,'store'])->name('categoria.store');
-    Route::get('/pedidos/pendientes', [PedidoController::class, 'pendientes'])->name('pedidos.pendientes');
+////////////////////////////////////////////
+// Rutas para gestionar detalles de pedido
+Route::get('/detallepedido/create', [PedidoDetalleController::class, 'create'])->name('detallepedido.create');
+Route::post('/pedidos.detalles', [PedidoDetalleController::class, 'guardarDetallePedido'])->name('guardardetalle.pedido')->name('detallepedido.guardar');
+    Route::post('/detallepedido/store', [PedidoDetalleController::class, 'store'])->name('detallepedido.store');
+    Route::post('/detallepedido/store', [PedidoDetalleController::class, 'store'])->name('detallepedido.store');
 
-    ////////////////////////////////////////////////////////////////////////////////////////}
+Route::get('/pedidos/proveedor/{idProveedor}', [PedidoDetalleController::class, 'detallePedidosPorProveedor'])->name('pedidos.por_proveedor');
+//////////////////////
+// Rutas relacionadas con proveedores
+Route::get('/proveedores', [PedidoController::class, 'mostrarProveedores'])->name('proveedores.index');
+Route::get('/pedidos/{idProveedor}', [PedidoController::class, 'pedidosPorProveedor'])->name('pedidos.por_proveedor');
 
-    //inicio de sesion/--------------------------------------------------------------------------------------------
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::middleware('auth')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    });
 
-    require __DIR__.'/auth.php';
-    //--------------------------------------------------------------------------------------------------------------
+//inicio de sesion/--------------------------------------------------------------------------------------------
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-    //autenticacion admin
-    route::get('/admin',[adminAuthController::class, 'index'])
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+//--------------------------------------------------------------------------------------------------------------
+
+//autenticacion admin
+route::get('/admin', [adminAuthController::class, 'index'])
     ->middleware('auth.admin')
     ->name('admin.index');
-    //autentificacion contable
-    route::get('/contable',[contableAuthController::class, 'index'])
+//autentificacion contable
+route::get('/contable', [contableAuthController::class, 'index'])
     ->middleware('auth.contable')
     ->name('contable.index');
-    //autentificacion almacenista
-    route::get('/almacenista',[almacenistaAuthController::class, 'index'])
+//autentificacion almacenista
+route::get('/almacenista', [almacenistaAuthController::class, 'index'])
     ->middleware('auth.almacenista')
     ->name('almacenista.index');
-    //autenticacion invitado
-    route::get('/invitado',[invitadoAuthController::class, 'index'])
+//autenticacion invitado
+route::get('/invitado', [invitadoAuthController::class, 'index'])
     ->middleware('auth.invitado')
     ->name('invitado.index');

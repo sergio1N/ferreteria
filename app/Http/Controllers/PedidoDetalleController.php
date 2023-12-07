@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\producto;
 use App\Models\detallePedido;
 use App\Models\Proveedor;
+use App\Http\Controllers\Log;
 
 class PedidoDetalleController extends Controller
 {
@@ -55,25 +57,89 @@ class PedidoDetalleController extends Controller
         $pedido = Pedido::with('detalles')->find($idPedido);
         return view('pedidos.detalle', compact('pedido'));
     }
-
     public function store(Request $request)
     {
         // Valida la solicitud
         $request->validate([
-            'idpedido' => 'required|exists:pedido,id',
-            'idproducto' => 'required',
-            'descripcion' => 'required',
-            'precio' => 'required|numeric',
-            'cantidad' => 'required|numeric',
-            'valortotal' => 'required|numeric',
+            'idpedido' => 'required|exists:pedidos,id',
+            'idproducto' => 'required|exists:productos,idproducto',
+            // Otros campos de validación...
         ]);
 
         // Crea un nuevo detalle de pedido
-        DetallePedido::create($request->all());
+        $detalle = DetallePedido::create($request->all());
+
+        // Actualiza el stock del producto
+        $producto = Producto::find($request->idproducto);
+
+        // Verifica si el producto se encuentra
+        if ($producto) {
+            $producto->stock += $request->cantidad;
+            $producto->save();
+
+            // Suma el stock del DetallePedido al stock del Producto
+            $producto->stock += $detalle->stock; // Asumo que hay un campo 'stock' en DetallePedido
+            $producto->save();
+
+            // Registros de depuración
+            Log::info("Stock actualizado para producto {$producto->idproducto}. Nuevo stock: {$producto->stock}");
+        } else {
+            // Registros de depuración si el producto no se encuentra
+            Log::error("No se encontró el producto con ID {$request->idproducto} al actualizar el stock.");
+        }
 
         // Puedes redirigir a donde desees después de almacenar el detalle del pedido
-        return redirect()->route('detallepedido.create')->with('success', 'Detalle de pedido creado correctamente');
+        return response()->json(['mensaje' => 'Detalle del pedido guardado con éxito']);
     }
+
+    
+
+    public function guardarDetallePedido(Request $request)
+    {
+        // Validar la solicitud
+        $request->validate([
+            'detalles' => 'required|array',
+            'detalles.*.idproducto' => 'required|exists:productos,idproducto',
+            'detalles.*.cantidad' => 'required|numeric|min:1',
+            // Otras reglas de validación según tus requisitos
+        ]);
+    
+        try {
+            // Iniciar una transacción para asegurar la consistencia de la base de datos
+            \DB::beginTransaction();
+    
+            foreach ($request->input('detalles') as $detalle) {
+                // Crear un nuevo detalle de pedido
+                DetallePedido::create([
+                    'idpedido' => $request->input('idpedido'), // Asegúrate de tener este campo disponible en tu formulario
+                    'idproducto' => $detalle['idproducto'],
+                    'cantidad' => $detalle['cantidad'],
+                    // Otros campos del detalle del pedido
+                ]);
+    
+                // Actualizar el stock del producto
+                $producto = Producto::find($detalle['idproducto']);
+    
+                if ($producto) {
+                    $producto->stock -= $detalle['cantidad'];
+                    $producto->save();
+                }
+            }
+    
+            // Confirmar la transacción
+            \DB::commit();
+    
+            // Devolver una respuesta JSON
+            return response()->json(['mensaje' => 'Detalle de pedido guardado correctamente']);
+        } catch (\Exception $e) {
+            // Deshacer la transacción en caso de error
+            \DB::rollback();
+    
+            // Devolver una respuesta JSON con el mensaje de error
+            return response()->json(['error' => 'Error al guardar el detalle del pedido'], 500);
+        }
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -101,15 +167,19 @@ class PedidoDetalleController extends Controller
 
 
     
-        public function detallePedidosPorProveedor($idProveedor)
-        {
-            $proveedor = Proveedor::findOrFail($idProveedor);
+    public function detallePedidosPorProveedor($idProveedor)
+    {
+        $proveedor = Proveedor::findOrFail($idProveedor);
     
-            // Obtén los pedidos del proveedor con detalles
-            $pedidos = Pedido::with('detalles')->where('idproveedor', $idProveedor)->get();
+        // Obtén los pedidos del proveedor con detalles
+        $pedidos = Pedido::with('detalles')->where('idproveedor', $idProveedor)->get();
     
-            return view('pedido.detalle', compact('proveedor', 'pedidos'));
-        }
+        // Asegúrate de imprimir o hacer un dd para verificar si $pedidos tiene datos
+        dd($proveedor, $pedidos);
+    
+        // return view('pedido.detalle', compact('proveedor', 'pedidos'));
+    }
+    
     }
 
 

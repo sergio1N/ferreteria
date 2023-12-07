@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -15,7 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idproveedor');
             $table->foreign('idproveedor')->references('idproveedor')->on('proveedor');
             $table->string('fotofactura');
-            $table->datetime('fechahora')->default(DB::raw('CURRENT_TIMESTAMP')); // Agrega esta línea
+            $table->boolean('admitido')->default(false);
+            $table->datetime('fechahora')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }
@@ -28,3 +31,4 @@ return new class extends Migration
         Schema::dropIfExists('pedido');
     }
 };
+

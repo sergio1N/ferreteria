@@ -1,3 +1,5 @@
+/* Archivo: pedido.css */
+
 /* Estilos generales */
 body {
     background-color: #ffffff; /* Cambiado a blanco */
@@ -18,13 +20,11 @@ body {
 }
 
 /* Estilos para la lista de proveedores */
-h1, h2 {
-    color: #000; /* Cambiado a negro */
-    transition: color 0.3s; /* Transición de color al seleccionar */
-}
-
-h1:hover, h2:hover {
-    color: #333; /* Color más oscuro al seleccionar */
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
 }
 
 .lista-proveedores {
@@ -57,6 +57,56 @@ ul {
 .lista-proveedores a:hover {
     background-color: #333;
     color: #fff;
+}
+
+/* Estilos para la vista detallepedi.css */
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-top: 20px; /* Añadido espacio superior */
+}
+
+h2 {
+    color: #555;
+    margin-top: 15px; /* Añadido espacio superior */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #1CB698;
+    color: #fff;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    margin: 0;
+}
+
+/* Añadido estilo para el mensaje cuando no hay detalles */
+p {
+    color: #555;
+    text-align: center;
 }
 
 /* SECCION RESPONSIVE */

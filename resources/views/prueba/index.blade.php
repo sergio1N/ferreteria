@@ -1,9 +1,6 @@
-@extends('layauds.base')
-
-@section('contenido')
-    <a href="{{ route('productos.agregar') }}"><button>ingresar producto</button></a>
 @extends('roles.admin.homeAdmin')
 @section('adminContenido')
+    <a href="{{ route('productos.agregar') }}"><button>ingresar producto</button></a>
 <br>
 <br>
 <br>

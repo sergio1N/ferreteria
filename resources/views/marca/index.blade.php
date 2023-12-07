@@ -1,9 +1,13 @@
-@extends('layauds.base')
-@section('contenido')
+@extends('roles.admin.homeAdmin')
+@section('adminContenido')
 <script src="{{ asset('js/agregarproducto.js') }}"></script>
-    <main>
-
-        <body>
+<main>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <body>
             
             <br>
             <a href="{{ route('marcas.ocultas') }}"><button>marcas desabilitadas</button></a>

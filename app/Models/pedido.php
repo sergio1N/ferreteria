@@ -17,9 +17,9 @@ public function proveedor()
 {
     return $this->belongsTo(Proveedor::class, 'idproveedor');
 }
+
 public function detalles()
 {
-    return $this->hasMany(DetallePedido::class, 'idpedido');
+    return $this->hasMany(DetallePedido::class, 'idpedido', 'idpedido');
 }
-
 }

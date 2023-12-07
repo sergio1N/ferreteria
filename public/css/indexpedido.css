@@ -1,0 +1,105 @@
+/* Estilos generales */
+body {
+    background-color: #ffffff; /* Cambiado a blanco */
+    color: #333; /* Texto oscuro en lugar de claro para mejorar la legibilidad */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.table-container {
+    margin: 20px;
+}
+
+.btn-primary {
+    background-color: #555;
+    color: #fff;
+    margin-right: 10px;
+}
+
+/* Estilos para la tabla de pedidos */
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Estilos para las imágenes y el modal */
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.cerrar-modal {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+/* SECCION RESPONSIVE */
+@media screen and (max-width: 980px) {
+    nav {
+        display: none;
+    }
+    .contenedor-header .nav-responsive {
+        display: block;
+    }
+    nav.responsive {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 75px;
+        background-color: #252A2E;
+        width: 180px;
+    }
+    nav.responsive ul {
+        display: block !important;
+    }
+    nav.responsive ul li {
+        border-bottom: 1px solid #fff;
+        padding: 10px 0;
+    }
+}
