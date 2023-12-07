@@ -12,6 +12,7 @@ use App\Http\Controllers\roles\contableAuthController;
 use App\Http\Controllers\roles\almacenistaAuthController;
 use App\Http\Controllers\roles\invitadoAuthController;
 use App\Http\Controllers\PedidoDetalleController;
+use App\Http\Controllers\carritoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -60,6 +61,7 @@ Route::delete('/comprar-producto/{id}', [CarritoController::class, 'comprarProdu
 Route::get('/productosAdmin', [ProductosController::class, 'createadmin'])->name('productosadmin.agregar');
 Route::get('/proveedoresAdmin', [proveedorcontroller::class, 'proveadmin'])->name('proveedoresadmin.agregar');
 Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('pedidoadmin.agregar');
+Route::get('/inicioAdmin', [pedidocontroller::class, 'vamosinicio'])->name('inicio.admin');
 
 
 

@@ -13,7 +13,7 @@ class adminAuthController extends Controller
     public function index()
     {
 
-        return view('roles/admin/homeAdmin');
+        return view('roles/admin/inicio');
 
 
     }

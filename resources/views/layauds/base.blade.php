@@ -5,11 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
     <meta name="csrf-token" content="{{ csrf_token() }}">
-=======
-
->>>>>>> a0b8b86609b5f287e9fb4da455d10472d015d2ed
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/estiloweb.css') }}">
     <script></script>
