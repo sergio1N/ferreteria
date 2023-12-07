@@ -1,8 +1,6 @@
 /* Estilos generales */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 main {
@@ -18,19 +16,14 @@ table.producto {
 
 table.producto th,
 table.producto td {
-    border: 1px solid #1CB698;
-    padding: 12px;
-    text-align: center; /* Ahora el texto está centrado */
-}
-
-table.producto th {
-    background-color: #1CB698;
-    color: white;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
 }
 
 /* Estilos de los botones */
 button {
-    background-color: #1CB698;
+    background-color: #4CAF50;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -39,21 +32,19 @@ button {
 }
 
 button:hover {
-    background-color: #147761;
+    background-color: #45a049;
 }
 
 /* Estilos del buscador */
 #buscador {
     margin-top: 10px;
-    padding: 10px;
+    padding: 8px;
     width: 50%;
-    border: 1px solid #1CB698;
-    border-radius: 5px;
 }
 
 /* Estilos de las acciones */
 td a {
-    color: #1CB698;
+    color: #007bff;
     text-decoration: none;
 }
 

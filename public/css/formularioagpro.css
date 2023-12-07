@@ -1,70 +1,139 @@
-input[type="file"]::-webkit-file-upload-button {
-    visibility: hidden; /* Oculta el botón predeterminado de selección de archivo */
-  }
-  input[type="file"]::before {
-    content: 'Seleccionar imagen'; /* Agrega un texto personalizado para el botón */
-    display: inline-block;
-    background: #80858a;
-    color: white;
-    padding: 1px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-    white-space: nowrap;
-  }
-  
-  /* Asegura que el estilo del botón se aplique en otros navegadores */
-  input[type="file"]::-ms-browse {
-    visibility: hidden;
-  }
-  input[type="file"]::-ms-value {
-    visibility: hidden;
-  }
-/*cambir de color boton*/
+/* Estilos generales */
+body {
+  background-color: #ffffff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
 
-/*  no seleccionado archivo */
+.container {
+  margin: 20px;
+}
+
+/* Estilos para el formulario */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h6 {
+  text-align: center;
+}
+
+/* Estilos para los campos del formulario */
+form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+form select,
+form input,
+form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+/* Estilos para el botón de selección de archivo */
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type="file"]::before {
+  content: 'Seleccionar imagen';
+  display: inline-block;
+  background: #80858a;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+}
+
+input[type="file"]::-ms-browse {
+  visibility: hidden;
+}
+
+input[type="file"]::-ms-value {
+  visibility: hidden;
+}
+
+/* Cambio de color para el botón de selección de archivo */
 input[type="file"]::before {
   content: 'Seleccionar archivo';
-  /* ... otros estilos ... */
   background-color: grey;
   color: white;
 }
 
-/* se ha seleccionado un archivo */
+/* Cambio de color cuando se ha seleccionado un archivo */
 input[type="file"].file-selected::before {
-  background-color: #4caf50; /* color*/
+  background-color: #4caf50;
 }
 
-
-
+/* Estilos para el mensaje de éxito */
 #success-message {
-    display: none;
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position:fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    border-radius: 5px;
-    animation: fadeOut 3s ease-in-out;
+  display: none;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  animation: fadeOut 3s ease-in-out;
 }
 
 @keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
 }
-/*estilos para nuevo de select */
-select#categoria option[value="nuevaC"] {
-  background-color: #E3E3E3;
-  ;
+
+/* Estilos para el modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
 }
-select#marca option[value="nueva"] {
-  background-color: #E3E3E3;
+
+.modal-contenido {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
+
+.modal-contenido img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* Estilos para el botón de cierre del modal */
+.cerrar-modal {
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+#medida {
+  display: block; /* Cambiado de 'none' a 'block' para que sea visible */
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+

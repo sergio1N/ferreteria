@@ -1,6 +1,6 @@
 @extends('roles.admin.homeAdmin')
 @section('adminContenido')
-    <a href="{{ route('productos.agregar') }}"><button>ingresar producto</button></a>
+<link rel="stylesheet" href="{{ asset('css/indexproducto.css') }}">
 <br>
 <br>
 <br>
