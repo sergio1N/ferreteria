@@ -1,5 +1,17 @@
 @extends('layauds.base')
 @section('contenido')
+    @if (session('success'))
+        <div class="alert alert-success" id="success-message">
+            {{ session('success') }}
+        </div>
+        <script>
+            const successMessage = document.getElementById('success-message');
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000); // 3000 milisegundos = 3 segundos
+        </script>
+    @endif
+
     <div class="container-title">
         <h2>{{ $producto->nombre }}</h2>
     </div>
@@ -51,33 +63,71 @@
                                         <img id="productoImagen" src="#" alt="Producto">
                                     </div>
                                     <div class="col-md-6">
-                                        <!-- Información del producto -->
-                                        <h4 id="productoNombre"></h4>
-                                        <p id="productoDescripcion"></p>
-                                        <p>Precio: $<span id="productoPrecio"></span></p>
-                                        <p> medida: <span id="productoUnidadMedida"></span></p>
-                                        <p>Total: $<span id="productoTotal">0</span></p>
-                                        <!-- Contador de cantidad -->
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <button id="restarCantidad" class="btn btn-outline-secondary"
-                                                    type="button">-</button>
+                                        <form action="{{ route('carrito.agregar') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                            <!-- Información del producto -->
+                                            <h4 id="productoNombre"></h4>
+                                            <p id="productoDescripcion"></p>
+                                            <p>Precio: $<span id="productoPrecio"></span></p>
+                                            <p> medida: <span id="productoUnidadMedida"></span></p>
+                                            <p>Total: $<span id="productoTotal">0</span></p>
+                                            <!-- Contador de cantidad -->
+                                            <input type="hidden" name="id_producto" id="id_producto"
+                                                value="{{ $producto->idproducto }}">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <button id="restarCantidad" class="btn btn-outline-secondary"
+                                                        type="button">-</button>
+                                                </div>
+                                                <input type="text" id="cantidad" name="cantidad" min="1"
+                                                    class="form-control text-center" value="1" readonly>
+                                                <div class="input-group-append">
+                                                    <button id="sumarCantidad" class="btn btn-outline-secondary"
+                                                        type="button">+</button>
+                                                </div>
                                             </div>
-                                            <input type="text" id="cantidad" class="form-control text-center"
-                                                value="0" readonly>
-                                            <div class="input-group-append">
-                                                <button id="sumarCantidad" class="btn btn-outline-secondary"
-                                                    type="button">+</button>
-                                            </div>
-                                        </div>
-                                        <button id="agregarCarrito" class="btn btn-success">Agregar al carrito ‎ <i
-                                                class='bx bx-cart-alt'></i></button>
+                                            @guest
+                                                <!-- Botón para mostrar el modal -->
+                                                <button class="btn btn-success" type="button" class="btn btn-primary"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    Agregar al carrito ‎ <i class='bx bx-cart-alt'></i>
+                                                </button>
+                                            @else
+                                                <!-- Botón para usuarios autenticados -->
+                                                <button type="submit" class="btn btn-success">
+                                                    Agregar al carrito ‎ <i class='bx bx-cart-alt'></i>
+                                                </button>
+                                            @endguest
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Contenido del cuerpo del modal -->
+                                <p>Para agregar productos al carrito, debes iniciar sesión.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <a href="{{ route('productos.index') }}"><button type="button"
+                                        class="btn btn-primary">Iniciar Sesión</button></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="container-description">
                     <div class="title-description">
@@ -125,24 +175,56 @@
     </main>
 
     <section class="container-related-products">
-        <h2>Productos Relacionados</h2>
-        <div class="products-conatiner">
-            @foreach ($productosRelacionados as $productoRelacionado)
-            <div class="box">
-                <a href="{{ route('productos.vista', ['id' => $productoRelacionado->idproducto]) }}">
-                    <img class="" src="{{ asset($productoRelacionado->imagen) }}" alt="{{ $productoRelacionado->nombre }}">
-                </a>
-                <span>productos disponibles</span>
-                <h2>{{ $productoRelacionado->nombre }}</h2>
-                <h3 class="price">${{ $productoRelacionado->precio }} <span>{{ $productoRelacionado->unidadmedida }}</span></h3>
-                <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
-                    data-imagen="{{ asset($productoRelacionado->imagen) }}" data-nombre="{{ $productoRelacionado->nombre }}"
-                    data-descripcion="{{ $productoRelacionado->descripcion }}" data-precio="{{ $productoRelacionado->precio }}"></i>
-                <i class='bx bx-heart'></i>
-                <span class="discount">-25%</span>
+        @if ($productosRelacionados->isEmpty())
+            <h2>Más de nuestros productos</h2>
+            <div class="products-conatiner">
+                @foreach ($random as $productoRandom)
+                    <div class="box">
+                        <a href="{{ route('productos.vista', ['id' => $productoRandom->idproducto]) }}">
+                            <img class="" src="{{ asset($productoRandom->imagen) }}"
+                                alt="{{ $productoRandom->nombre }}">
+                        </a>
+                        <span>Productos disponibles</span>
+                        <h2>{{ $productoRandom->nombre }}</h2>
+                        <h3 class="price">${{ $productoRandom->precio }}
+                            <span>{{ $productoRandom->unidadmedida }}</span>
+                        </h3>
+                        <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
+                            data-imagen="{{ asset($productoRandom->imagen) }}"
+                            data-nombre="{{ $productoRandom->nombre }}"
+                            data-descripcion="{{ $productoRandom->descripcion }}"
+                            data-precio="{{ $productoRandom->precio }}"></i>
+                        <i class='bx bx-heart'></i>
+                        <span class="discount">-25%</span>
+                    </div>
+                @endforeach
             </div>
-            @endforeach
-        </div>
+        @else
+            <h2>Más productos como este</h2>
+            <div class="products-conatiner">
+                @foreach ($productosRelacionados as $productoRelacionado)
+                    <div class="box">
+                        <a href="{{ route('productos.vista', ['id' => $productoRelacionado->idproducto]) }}">
+                            <img class="" src="{{ asset($productoRelacionado->imagen) }}"
+                                alt="{{ $productoRelacionado->nombre }}">
+                        </a>
+                        <span>Productos disponibles</span>
+                        <h2>{{ $productoRelacionado->nombre }}</h2>
+                        <h3 class="price">${{ $productoRelacionado->precio }}
+                            <span>{{ $productoRelacionado->unidadmedida }}</span>
+                        </h3>
+                        <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
+                            data-imagen="{{ asset($productoRelacionado->imagen) }}"
+                            data-nombre="{{ $productoRelacionado->nombre }}"
+                            data-descripcion="{{ $productoRelacionado->descripcion }}"
+                            data-precio="{{ $productoRelacionado->precio }}"></i>
+                        <i class='bx bx-heart'></i>
+                        <span class="discount">-25%</span>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
     </section>
 
 

@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
           $('#productoPrecio').text(precio); // Establecer el precio
           $('#productoUnidadMedida').text('Unidad'); // Cambiar 'Unidad' por el valor correspondiente
       
-          var cantidad = 0;
+          var cantidad = 1;
       
           function actualizarTotal(cantidad) {
             var total = precio * cantidad;
@@ -103,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
           // Restablecer el modal al cerrar
           $('#productoModal').on('hidden.bs.modal', function () {
-            $('#cantidad').val('0');
-            $('#productoTotal').text('0');
+            $('#cantidad').val('1');
+            $('#productoTotal').text('1');
       
           });
         });

@@ -1,7 +1,17 @@
 @extends('layauds.base')
 @section('contenido')
-    
     {{-- home --}}
+    @if (session('success'))
+        <div class="alert alert-success" id="success-message">
+            {{ session('success') }}
+        </div>
+        <script>
+            const successMessage = document.getElementById('success-message');
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000); // 3000 milisegundos = 3 segundos
+        </script>
+    @endif
     <section class="home swiper" id="home">
         <div class="swiper-wrapper">
             {{-- slide 1 --}}
@@ -87,7 +97,7 @@
     <section class="products" id="products">
         <div class="heading">
             <h1>Nuestros <br><span>productos</span></h1>
-            <a href="{{route('productos.filtro')}}" class="boton">Mirar más<i class='bx bx-right-arrow-alt'></i></a>
+            <a href="{{ route('productos.filtro') }}" class="boton">Mirar más<i class='bx bx-right-arrow-alt'></i></a>
         </div>
     </section>
     {{-- contenido de productos --}}
@@ -97,7 +107,7 @@
                 <a href="{{ route('productos.vista', ['id' => $producto->idproducto]) }}">
                     <img class="" src="{{ asset($producto->imagen) }}" alt="{{ $producto->nombre }}">
                 </a>
-                <span>productos disponibles</span>
+
                 <h2>{{ $producto->nombre }}</h2>
                 <h3 class="price">${{ $producto->precio }} <span>{{ $producto->unidadmedida }}</span></h3>
                 <i class='bx bx-cart-alt' data-toggle="modal" data-target="#productoModal"
@@ -131,26 +141,43 @@
                         </div>
                         <div class="col-md-6">
                             <!-- Información del producto -->
-                            <h4 id="productoNombre"></h4>
-                            <p id="productoDescripcion"></p>
-                            <p>Precio: $<span id="productoPrecio"></span></p>
-                            <p> medida: <span id="productoUnidadMedida"></span></p>
-                            <p>Total: $<span id="productoTotal">0</span></p>
-                            <!-- Contador de cantidad -->
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <button id="restarCantidad" class="btn btn-outline-secondary"
-                                        type="button">-</button>
+                            <form action="{{ route('carrito.agregar') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                                <!-- Información del producto -->
+                                <h4 id="productoNombre"></h4>
+                                <p id="productoDescripcion"></p>
+                                <p>Precio: $<span id="productoPrecio"></span></p>
+                                <p> medida: <span id="productoUnidadMedida"></span></p>
+                                <p>Total: $<span id="productoTotal">0</span></p>
+                                <!-- Contador de cantidad -->
+                                <input type="hidden" name="id_producto" id="id_producto"
+                                    value="{{ $producto->idproducto }}">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button id="restarCantidad" class="btn btn-outline-secondary"
+                                            type="button">-</button>
+                                    </div>
+                                    <input type="text" id="cantidad" name="cantidad" min="1"
+                                        class="form-control text-center" value="1" readonly>
+                                    <div class="input-group-append">
+                                        <button id="sumarCantidad" class="btn btn-outline-secondary"
+                                            type="button">+</button>
+                                    </div>
                                 </div>
-                                <input type="text" id="cantidad" class="form-control text-center" value="0"
-                                    readonly>
-                                <div class="input-group-append">
-                                    <button id="sumarCantidad" class="btn btn-outline-secondary"
-                                        type="button">+</button>
-                                </div>
-                            </div>
-                            <button id="agregarCarrito" class="btn btn-success">Agregar al carrito ‎ <i
-                                    class='bx bx-cart-alt'></i></button>
+                                @guest
+                                    <!-- Botón para mostrar el modal -->
+                                    <button class="btn btn-success" type="button" class="btn btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Agregar al carrito ‎ <i class='bx bx-cart-alt'></i>
+                                    </button>
+                                @else
+                                    <!-- Botón para usuarios autenticados -->
+                                    <button type="submit" class="btn btn-success">
+                                        Agregar al carrito ‎ <i class='bx bx-cart-alt'></i>
+                                    </button>
+                                @endguest
+                            </form>
                         </div>
                     </div>
                 </div>

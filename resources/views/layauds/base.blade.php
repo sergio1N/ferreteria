@@ -5,21 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <meta name="csrf-token" content="{{ csrf_token() }}">
+=======
+
+>>>>>>> a0b8b86609b5f287e9fb4da455d10472d015d2ed
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/estiloweb.css') }}">
+    <script></script>
     {{-- caja de iconos --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     {{-- slider --}}
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-   
+
 
     <!-------------boostrap------------------------>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
-    
+
     <!---->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -33,21 +38,42 @@
     <title>ferreteria S&J </title>
     <link rel="icon" href="{{ asset('imagenes/logotipo/logo.png') }}" type="image/png">
 </head>
+
 <body>
     <header>
         <a href="#" class="logo"><img class="logotipo" src="{{ asset('imagenes/logotipo/logo.png') }}"
                 alt=""></i>S&j </a>
         {{-- icono-menu --}}
         <div class="bx bx-menu" id="menu-icon"></div>
-       
+
         {{-- Lista de navegacion --}}
         <ul class="navbarr">
             <li><a href="#home" class="home-active">inicio</a></li>
             <li><a href="#categories">Categorias</a></li>
             <li><a href="#products">Productos</a></li>
-            <li><a href="#about">aceraca</a></li>
-            <li><a href="#customers">clientes</a></li>
         </ul>
+        <div class="floating-cart">
+            <a href="{{ route('carrito.compra') }}" style="position: relative;">
+                <i class='bx bxs-cart'></i>
+                <span class="cart-count"></span> <!-- Aquí se mostrará la cantidad -->
+            </a>
+        </div>
+        <script>
+            $(document).ready(function() {
+                // Hacer la solicitud para obtener la cantidad de productos en el carrito
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route("carrito.cantidad") }}',
+                    success: function(response) {
+                        // Actualizar la burbuja del carrito con la cantidad obtenida
+                        $('.cart-count').text(response.cantidad);
+                    },
+                    error: function() {
+                        console.log('Error al obtener la cantidad de productos en el carrito.');
+                    }
+                });
+            });
+        </script>
         {{-- perfil --}}
         <div class="profile">
             <nav>
@@ -76,7 +102,8 @@
     <footer>
         <section class="footer" id="footer">
             <div class="footer-box">
-                <a href="#" class="logo"><img class="logotipo" src="{{ asset('imagenes/logotipo/logo.png') }}"alt=""></i>S&j </a>
+                <a href="#" class="logo"><img class="logotipo"
+                        src="{{ asset('imagenes/logotipo/logo.png') }}"alt=""></i>S&j </a>
                 <p>direccion</p>
                 <div class="social">
                     <a href="#"><i class='bx bxl-facebook'></i></a>
@@ -100,13 +127,14 @@
             </div>
             <div class="footer-box">
                 <h2>informacion</h2>
-               <p>pendiente</p>
-               <form action="">
-                <input type="email" name="" id="" placeholder="acceder a promociones">
-                <i class='bx bx-arrow-back bx-rotate-180' ></i>
-               </form>
+                <p>pendiente</p>
+                <form action="">
+                    <input type="email" name="" id="" placeholder="acceder a promociones">
+                    <i class='bx bx-arrow-back bx-rotate-180'></i>
+                </form>
             </div>
         </section>
     </footer>
 </body>
+
 </html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 use App\Http\Controllers\departamentoController;
 use App\Http\Controllers\productosController;
@@ -13,18 +14,25 @@ use App\Http\Controllers\roles\almacenistaAuthController;
 use App\Http\Controllers\roles\invitadoAuthController;
 use App\Http\Controllers\PedidoDetalleController;
 use Illuminate\Support\Facades\Route;
+=======
+    <?php
+    use App\Http\Controllers\departamentoController;
+    use App\Http\Controllers\productosController;
+    use App\Http\Controllers\BusquedaproController;
+    use App\Http\Controllers\marcaController;
+    use App\Http\Controllers\proveedorcontroller;
+    use App\Http\Controllers\pedidocontroller;
+    use App\Http\Controllers\categoriaController;
+    use App\Http\Controllers\ProfileController;
+    use App\Http\Controllers\roles\adminAuthController;
+    use App\Http\Controllers\roles\contableAuthController;
+    use App\Http\Controllers\roles\almacenistaAuthController;
+    use App\Http\Controllers\roles\invitadoAuthController;
+    use App\Http\Controllers\PedidoDetalleController;
+    use App\Http\Controllers\carritoController;
+    use Illuminate\Support\Facades\Route;
+>>>>>>> a0b8b86609b5f287e9fb4da455d10472d015d2ed
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 /*
 |--------------------------------------------------------------------------
@@ -56,16 +64,33 @@ Route::get('/prodfiltro', [ProductosController::class, 'mostrarfiltro'])->name('
 //manejar filtro de productos
 Route::post('/buscar-productos', [ProductosController::class, 'buscar'])->name('buscar.productos');
 
+//carrito
+Route::get('/carritos', [carritoController::class,'index'])->name('carrito.compra');
+Route::post('/agregar-al-carrito',[CarritoController::class,'store'])->name('carrito.agregar');
+Route::get('/carrito/cantidad', [CarritoController::class,'cantidadProductosEnCarrito'])->name('carrito.cantidad');
+Route::delete('/eliminar-producto/{idcarrito}', [CarritoController::class, 'eliminarProducto'])->name('eliminar.producto');
+Route::delete('/comprar-producto/{id}', [CarritoController::class, 'comprarProducto'])->name('comprar.producto');
+
+
+
+
+
 ///admin
 Route::get('/productosAdmin', [ProductosController::class, 'createadmin'])->name('productosadmin.agregar');
 Route::get('/proveedoresAdmin', [proveedorcontroller::class, 'proveadmin'])->name('proveedoresadmin.agregar');
 Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('pedidoadmin.agregar');
 
 
+<<<<<<< HEAD
 Route::get('/home', function () {
     return view('home');
 
 });
+=======
+    Route::get('/home', function () {
+        return view('home');
+    });
+>>>>>>> a0b8b86609b5f287e9fb4da455d10472d015d2ed
 
 Route::get('/roles/home', [departamentoController::class, 'index'])->name('home.agregar');
 

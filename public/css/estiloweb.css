@@ -21,6 +21,59 @@
     --text--color: #1a2428;
     --bg-color: #fff;
 }
+/* iconos */
+
+.iconheader a i {
+    font-size: 32px; /* Tamaño de los íconos */
+    color: #000; /* Color de los íconos */
+    text-decoration: none; /* Quita subrayado */
+}
+
+.iconheader a i:hover {
+    color: #e30a0a; /* Cambia de color al pasar el mouse */
+}
+/* burbuja */
+.floating-cart {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 999;
+    display: block;
+    opacity: 1;
+}
+
+.floating-cart a i {
+    font-size: 30px;
+    color: #000;
+    text-decoration: none;
+}
+
+.floating-cart:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+/* noti */
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #c00;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
 /* customisar el scrool */
 ::-webkit-scrollbar{
     width: 0.5rem;

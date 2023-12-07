@@ -37,6 +37,8 @@ class productosController extends Controller
         $product = Producto::get();
         return view('roles/usuario/profiltro', compact('product', 'categorias', 'marcas'));
     }
+    //carrito
+  
 
     public function buscar(Request $request)
     {
@@ -151,17 +153,22 @@ class productosController extends Controller
      */
     public function show($id)
     {
+        
         $producto = Producto::find($id); // Obtener el producto por su ID
 
         // Obtener la categoría del producto actual
         $categoriaProductoActual = $producto->idcategoria;
+
+        $random = producto::where('idproducto','!=',$producto->idproducto)
+        ->take(9)
+        ->get();
 
         // Obtener productos de la misma categoría excluyendo el producto actual
         $productosRelacionados = Producto::where('idproducto', '!=', $producto->idproducto)
             ->where('idcategoria', $categoriaProductoActual)
             ->get();
 
-        return view('roles/usuario/productos', compact('producto', 'productosRelacionados'));
+        return view('roles/usuario/productos', compact('producto', 'productosRelacionados','random',));
     }
 
 
