@@ -48,7 +48,7 @@
 }
 
 .floating-cart a i {
-    font-size: 24px;
+    font-size: 30px;
     color: #000;
     text-decoration: none;
 }
@@ -57,7 +57,21 @@
     transform: scale(1.1);
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }
-
+/* noti */
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #c00;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: bold;
+}
 
 
 /* customisar el scrool */

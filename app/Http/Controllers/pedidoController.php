@@ -54,7 +54,7 @@ class PedidoController extends Controller
         try {
             $request->validate([
                 'idproveedor' => 'required|exists:proveedor,idproveedor',
-                'fotoFactura' => 'required|mimes:jpeg,png,pdf,doc,docx',
+                'fotoFactura' => 'required|mimes:jpg,png,pdf,doc,docx',
             ]);
             if ($request->hasFile('fotoFactura')) {
                 $archivo = $request->file('fotoFactura');

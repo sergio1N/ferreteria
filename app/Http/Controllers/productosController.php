@@ -37,6 +37,8 @@ class productosController extends Controller
         $product = Producto::get();
         return view('roles/usuario/profiltro', compact('product', 'categorias', 'marcas'));
     }
+    //carrito
+  
 
     public function buscar(Request $request)
     {

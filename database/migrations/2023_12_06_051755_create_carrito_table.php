@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('carrito', function (Blueprint $table) {
             $table->id('idcarrito');
-            $table->unsignedBigInteger('idpersona');
+            $table->unsignedBigInteger('id');
             $table->unsignedBigInteger('idproducto');
             $table->integer('cantidad');
-            $table->foreign('idpersona')->references('idpersona')->on('persona');
+            $table->foreign('id')->references('id')->on('users');
             $table->foreign('idproducto')->references('idproducto')->on('producto');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

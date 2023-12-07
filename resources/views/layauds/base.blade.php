@@ -48,12 +48,28 @@
             <li><a href="#categories">Categorias</a></li>
             <li><a href="#products">Productos</a></li>
         </ul>
-        <div class="iconheader">
-        
-            <div class="floating-cart">
-                <a href="#customers"><i class='bx bxs-cart'></i></a>
-            </div>
+        <div class="floating-cart">
+            <a href="{{ route('carrito.compra') }}" style="position: relative;">
+                <i class='bx bxs-cart'></i>
+                <span class="cart-count"></span> <!-- Aquí se mostrará la cantidad -->
+            </a>
         </div>
+        <script>
+            $(document).ready(function() {
+                // Hacer la solicitud para obtener la cantidad de productos en el carrito
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route("carrito.cantidad") }}',
+                    success: function(response) {
+                        // Actualizar la burbuja del carrito con la cantidad obtenida
+                        $('.cart-count').text(response.cantidad);
+                    },
+                    error: function() {
+                        console.log('Error al obtener la cantidad de productos en el carrito.');
+                    }
+                });
+            });
+        </script>
         {{-- perfil --}}
         <div class="profile">
             <nav>

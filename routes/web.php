@@ -12,6 +12,7 @@
     use App\Http\Controllers\roles\almacenistaAuthController;
     use App\Http\Controllers\roles\invitadoAuthController;
     use App\Http\Controllers\PedidoDetalleController;
+    use App\Http\Controllers\carritoController;
     use Illuminate\Support\Facades\Route;
 
 
@@ -25,17 +26,6 @@
     | be assigned to the "web" middleware group. Make something great!
     |
     */
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/home', function () {
     return view('home');
@@ -56,6 +46,17 @@ Route::get('/prodfiltro', [ProductosController::class, 'mostrarfiltro'])->name('
 //manejar filtro de productos
 Route::post('/buscar-productos', [ProductosController::class, 'buscar'])->name('buscar.productos');
 
+//carrito
+Route::get('/carritos', [carritoController::class,'index'])->name('carrito.compra');
+Route::post('/agregar-al-carrito',[CarritoController::class,'store'])->name('carrito.agregar');
+Route::get('/carrito/cantidad', [CarritoController::class,'cantidadProductosEnCarrito'])->name('carrito.cantidad');
+Route::delete('/eliminar-producto/{idcarrito}', [CarritoController::class, 'eliminarProducto'])->name('eliminar.producto');
+Route::delete('/comprar-producto/{id}', [CarritoController::class, 'comprarProducto'])->name('comprar.producto');
+
+
+
+
+
 ///admin
 Route::get('/productosAdmin', [ProductosController::class, 'createadmin'])->name('productosadmin.agregar');
 Route::get('/proveedoresAdmin', [proveedorcontroller::class, 'proveadmin'])->name('proveedoresadmin.agregar');
@@ -64,7 +65,6 @@ Route::get('/pedidosAdmin', [pedidocontroller::class, 'pedidoadmin'])->name('ped
 
     Route::get('/home', function () {
         return view('home');
-
     });
 
     Route::get('/roles/home', [departamentoController::class, 'index'])->name('home.agregar');
