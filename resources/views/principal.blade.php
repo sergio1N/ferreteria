@@ -18,8 +18,7 @@
             <div class="swiper-slide container">
                 <div class="home-text">
                     <span>aqui span</span>
-                    <h1>contenido slider</h1>
-                    <a href="#" class="boton">Ir<i class='bx bx-right-arrow-alt'></i></a>
+                    <h1>Bienvenido a ferreteria S&J</h1>
 
                 </div>
                 <img class="" src="{{ asset('\imagenes\logotipo\logo.png') }}" alt="">

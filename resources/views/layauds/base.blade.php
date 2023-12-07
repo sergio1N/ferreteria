@@ -100,7 +100,7 @@
             <div class="footer-box">
                 <a href="#" class="logo"><img class="logotipo"
                         src="{{ asset('imagenes/logotipo/logo.png') }}"alt=""></i>S&j </a>
-                <p>direccion</p>
+                <p>Carrera 12 #10-25 - Sogamoso (Boyacá)</p>
                 <div class="social">
                     <a href="#"><i class='bx bxl-facebook'></i></a>
                     <a href="#"><i class='bx bxl-instagram'></i></a>
