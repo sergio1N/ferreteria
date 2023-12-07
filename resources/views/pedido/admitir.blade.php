@@ -47,9 +47,7 @@
     
         <!-- Botón para finalizar el pedido -->
         <button type="button" onclick="finalizarPedido()">Finalizar Pedido</button>
-    
-        <!-- Botón para guardar el detalle del pedido -->
-        <button type="submit">Guardar Detalle</button>
+
     </form>
     
 
@@ -61,7 +59,8 @@
         </div>
     </div>
 
-    <script>
-        const proveedoresIndexRoute = "{{ route('proveedores.index') }}";
-    </script>
+<script>
+    const redireccionarRuta = "{{ route('proveedores.index') }}";
+</script>
+
 @endsection

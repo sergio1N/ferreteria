@@ -7,12 +7,12 @@ use App\Http\Controllers\proveedorcontroller;
 use App\Http\Controllers\pedidocontroller;
 use App\Http\Controllers\categoriaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\carritoController;
 use App\Http\Controllers\roles\adminAuthController;
 use App\Http\Controllers\roles\contableAuthController;
 use App\Http\Controllers\roles\almacenistaAuthController;
 use App\Http\Controllers\roles\invitadoAuthController;
 use App\Http\Controllers\PedidoDetalleController;
-use App\Http\Controllers\carritoController;
 use Illuminate\Support\Facades\Route;
 
 

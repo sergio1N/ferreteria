@@ -66,8 +66,8 @@
         <input type="text" id="unidadm" name="unidadm" placeholder="Kg, M, Mm, etc" oninput="mostrarOcultarCantidad()">
         <br>
         
-        <label for="medida">Cantidad medida:</label>
-        <input type="text" id="medida" name="medida" placeholder="25" style="display: none;">
+        <label for="medida" id="labelMedida">Cantidad medida:</label>
+        <input type="text" id="medida" name="medida" placeholder="25">
         <br>
         
         <label for="descripcion">Descripcion:</label>
@@ -135,3 +135,18 @@
         </div>
     </div>
 @endsection
+<script>
+    function mostrarOcultarCantidad() {
+        var unidadMedida = document.getElementById('unidadm').value;
+        var medidaInput = document.getElementById('medida');
+        var labelMedida = document.getElementById('labelMedida');
+
+        if (unidadMedida === 'unidades') {
+            medidaInput.style.display = 'block';
+            labelMedida.style.display = 'block';
+        } else {
+            medidaInput.style.display = 'none';
+            labelMedida.style.display = 'none';
+        }
+    }
+</script>
